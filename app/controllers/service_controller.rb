@@ -3,14 +3,25 @@ class ServiceController < ApplicationController
   end
 
   def pool
+    @service = 'pool'
   end
 
   def gym
+    @service = 'gym'
   end
 
-  def pool_acts
+  def group
+    @service = 'group'
+  end
+
+  def games
+    @service = 'games'
+  end
+
+  def acts
     @act = params[:act]
-    url = 'service/pool_acts/' + @act
+    @service = params[:service]
+    url = 'service/' + @service + '_acts/' + @act
     render url
   end
 end

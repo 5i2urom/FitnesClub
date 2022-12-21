@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   get 'service' => 'service#show'
   get 'service/pool' => 'service#pool', :as => 'pool'
   get 'service/gym' => 'service#gym', :as => 'gym'
+  get 'service/group' => 'service#group', :as => 'group'
+  get 'service/games' => 'service#games', :as => 'games'
 
-
-  get 'service/pool/acts' => 'service#pool_acts', :as => 'pool_acts'
+  get 'service/acts' => 'service#acts', :as => 'acts'
 
 
 end
