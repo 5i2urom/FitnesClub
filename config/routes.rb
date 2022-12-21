@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get 'start/show' => 'start#show'
 
   get 'service' => 'service#show'
-  get 'service/pool' => 'service#pool'
-  get 'service/gym' => 'service#gym'
+  get 'service/pool' => 'service#pool', :as => 'pool'
+  get 'service/gym' => 'service#gym', :as => 'gym'
+
+
+  get 'service/pool/acts' => 'service#pool_acts', :as => 'pool_acts'
 
 
 end
