@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_21_190648) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_21_221627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "calendar_records", force: :cascade do |t|
+    t.date "date_start"
+    t.date "date_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "service_act_id"
+    t.bigint "club_id"
+    t.bigint "coach_id"
+    t.index ["club_id"], name: "index_calendar_records_on_club_id"
+    t.index ["coach_id"], name: "index_calendar_records_on_coach_id"
+    t.index ["service_act_id"], name: "index_calendar_records_on_service_act_id"
+  end
 
   create_table "club_acts", force: :cascade do |t|
     t.bigint "club_id", null: false

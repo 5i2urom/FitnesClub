@@ -1,7 +1,6 @@
 <h1 class="mb-4">Услуги</h1>
 
 <% ServiceAct.select(:service).distinct.each do |i| %>
-    <%= form.hidden_field :service, :value => i.service %>
     <%= link_to i.service, act_path, class: 'nav-link px-2' %></li>  
 <% end %>
 

@@ -3,7 +3,8 @@ class ServiceController < ApplicationController
   end
 
   def act
-    @service = params[:service]
+    #@service = params[:service]
+    p @service
   end
 
   def pool

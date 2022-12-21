@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 
   get 'service/acts' => 'service#acts', :as => 'acts'
 
+  get 'service/act' => 'service#act', :as => 'act'
+
 
 end
