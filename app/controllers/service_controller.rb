@@ -2,6 +2,10 @@ class ServiceController < ApplicationController
   def show    
   end
 
+  def act
+    @service = params[:service]
+  end
+
   def pool
     @service = 'pool'
   end
