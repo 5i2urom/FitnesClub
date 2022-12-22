@@ -1,27 +1,31 @@
 class ServiceController < ApplicationController
-  def show    
+
+  def show
+    @transl = transl
   end
 
   def act
-    #@service = params[:service]
-    p @service
+    @record = ServiceAct.new(service: params[:service])
+    p @record
   end
 
-  def pool
-    @service = 'pool'
-  end
 
-  def gym
-    @service = 'gym'
-  end
+  # def pool
+  #   @service = 'pool'
+  # end
 
-  def group
-    @service = 'group'
-  end
+  # def gym
+  #   @service = 'gym'
+  #   p @record
+  # end
 
-  def games
-    @service = 'games'
-  end
+  # def group
+  #   @service = 'group'
+  # end
+
+  # def games
+  #   @service = 'games'
+  # end
 
   def acts
     @act = params[:act]
