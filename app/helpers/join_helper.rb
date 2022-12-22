@@ -16,19 +16,23 @@ module JoinHelper
         # p $record
         # p $record.has_key?(:service)
         # p '----------'
-        return unless service_params[:service].nil? 
-        # p 'xxxx'
-        # p $record
+        return unless service_params[:service].nil? && !$record.has_key?(:service) #нет параметров и записи в хэш - редирект
+        p 'aaaaaaaaaa'
+        p $record
         redirect_to join_path
     end
 
     def before_act
-        return unless act_params[:activity].nil? && $record.has_key?(:service) # имеет предыдущий ключ
+        return unless act_params[:activity].nil? && !$record.has_key?(:activity) &&
+            !$record.has_key?(:service) # #нет параметров и записи в хэш и предыдущего- редирект
+        p 'bbbbbbb'
         redirect_to join_path
     end
 
     def redirect_if_empty #если "голый" запрос
         return unless $record.empty?
+        p 'ccccccccc'
         redirect_to join_path
+        
     end
 end
