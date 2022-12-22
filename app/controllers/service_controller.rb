@@ -1,12 +1,11 @@
 class ServiceController < ApplicationController
+  include ServiceHelper
 
-  def show
-    @transl = transl
+  def show    
   end
 
   def act
     @record = ServiceAct.new(service: params[:service])
-    p @record
   end
 
 
