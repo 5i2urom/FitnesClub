@@ -2,8 +2,15 @@
 
 <% ServiceAct.select(:service).distinct.each do |i| %>
     <% file = "join/service/#{transl[i.service]}" %>     
-    <div> <% render file %> </div>
+    <div> <%=render file %> </div>
     <%= link_to i.service, service_path(:service => i.service), class: 'nav-link px-2' %></li>  
 <% end %>
+
+<%# <script>
+    alert(performance.navigation.type)
+    if(performance.navigation.type == 2) {
+   location.reload(true);
+}
+</script> %>
 
 

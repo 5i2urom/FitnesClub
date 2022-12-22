@@ -9,10 +9,12 @@ module JoinHelper
     end
 
     def before_show
+        [:service, :activity, :club, :coach].each { |key| $record.delete(key) if $record.has_key?(key) }
         $record = nil
     end
 
     def before_service
+        [:activity, :club, :coach].each { |key| $record.delete(key) if $record.has_key?(key) }
         # p $record
         # p $record.has_key?(:service)
         # p '----------'
@@ -23,15 +25,16 @@ module JoinHelper
     end
 
     def before_act
+        [:club, :coach].each { |key| $record.delete(key) if $record.has_key?(key) }
         return unless act_params[:activity].nil? && !$record.has_key?(:activity) &&
             !$record.has_key?(:service) # #нет параметров и записи в хэш и предыдущего- редирект
-        p 'bbbbbbb'
+        # p 'bbbbbbb'
         redirect_to join_path
     end
 
     def redirect_if_empty #если "голый" запрос
         return unless $record.empty?
-        p 'ccccccccc'
+        # p 'ccccccccc'
         redirect_to join_path
         
     end

@@ -14,7 +14,10 @@ class JoinController < ApplicationController
 
   def service 
     $record[:service] = service_params[:service] if not $record.has_key?(:service) # если пришел спереди, не перезаписывать
+                                                              #если сервис уже записан, не перезаписывать 
     p $record
+
+    #session[:return_to] ||= request.referer
   end
 
   def act
