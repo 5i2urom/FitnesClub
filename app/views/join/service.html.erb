@@ -1,0 +1,12 @@
+<% service = $record.service %>
+<h1 class="mb-4"> <%= service %> </h1>
+
+<% ServiceAct.select(:activity).where(service: service).each do |i| %>
+<% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>
+    
+<div> <% render file %> </div>
+<%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2' %></li>  
+<% end %>
+
+<%= button_to 'Назад', {action: "show"}, method: 'get', local: true, class: "btn btn-primary" %>
+

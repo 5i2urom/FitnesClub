@@ -3,15 +3,15 @@ Rails.application.routes.draw do
 
   get 'start/show' => 'start#show'
 
-  get 'service' => 'service#show'
-  get 'service/pool' => 'service#pool', :as => 'pool'
-  get 'service/gym' => 'service#gym', :as => 'gym'
-  get 'service/group' => 'service#group', :as => 'group'
-  get 'service/games' => 'service#games', :as => 'games'
+  get 'join' => 'join#show'
+  # get 'join/pool' => 'join#pool', :as => 'pool'
+  # get 'join/gym' => 'join#gym', :as => 'gym'
+  # get 'join/group' => 'join#group', :as => 'group'
+  # get 'join/games' => 'join#games', :as => 'games'
 
-  get 'service/acts' => 'service#acts', :as => 'acts'
+  get 'join/act' => 'join#act', :as => 'act'
 
-  get 'service/act' => 'service#act', :as => 'act'
+  get 'join/service' => 'join#service', :as => 'service'
 
 
 end
