@@ -8,17 +8,27 @@ module JoinHelper
         "Аэробика" => "aerobics", "Танцы" => "dance", "Боевые искусства" => "fight", "Силовые тренировки" => "power" }
     end
 
-    def show_cond
+    def before_show
         $record = nil
     end
 
     def before_service
-        return unless service_params[:service].nil?
+        # p $record
+        # p $record.has_key?(:service)
+        # p '----------'
+        return unless service_params[:service].nil? 
+        # p 'xxxx'
+        # p $record
         redirect_to join_path
     end
 
-    def act_cond
-        return unless act_params[:activity].nil?
+    def before_act
+        return unless act_params[:activity].nil? && $record.has_key?(:service) # имеет предыдущий ключ
+        redirect_to join_path
+    end
+
+    def redirect_if_empty #если "голый" запрос
+        return unless $record.empty?
         redirect_to join_path
     end
 end
