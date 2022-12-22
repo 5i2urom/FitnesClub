@@ -4,7 +4,7 @@
 <% ServiceAct.select(:activity).where(service: service).each do |i| %>
 <% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>
     
-<div> <%=render file %> </div>
+<div> <%= render file %> </div>
 <%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2' %></li>  
 <% end %>
 

@@ -35,7 +35,6 @@ module JoinHelper
     def redirect_if_empty #если "голый" запрос
         return unless $record.empty?
         # p 'ccccccccc'
-        redirect_to join_path
-        
+        redirect_to join_path        
     end
 end
