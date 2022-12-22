@@ -5,16 +5,19 @@ class JoinController < ApplicationController
   before_action :before_service, only: :service
   before_action :act_cond, only: :act
 
-  def show 
+  def show
+    $record = Hash.new(4)
+    p $record 
   end
 
-  def service
-    $record ||= CalendarRecord.new(service: service_params[:service]) # запись поля после выбора услуги
+  def service    
+    $record[:service] = service_params[:service] if not $record.has_key?(:service) # если пришел спереди, не перезаписывать
     p $record
   end
 
   def act
-    $record.activity = act_params[:activity]
+    $record[:activity] = act_params[:activity] if not $record.has_key?(:activity)
+    p $record
   end
 
   def service_params

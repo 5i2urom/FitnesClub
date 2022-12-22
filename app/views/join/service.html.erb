@@ -1,4 +1,4 @@
-<% service = $record.service %>
+<% service = $record[:service] %>
 <h1 class="mb-4"> <%= service %> </h1>
 
 <% ServiceAct.select(:activity).where(service: service).each do |i| %>

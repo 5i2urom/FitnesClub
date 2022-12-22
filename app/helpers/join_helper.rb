@@ -13,13 +13,12 @@ module JoinHelper
     end
 
     def before_service
-        #$record=CalendarRecord.new()
-        return unless service_params.nil?
+        return unless service_params[:service].nil?
         redirect_to join_path
     end
 
     def act_cond
-        # return unless $record.service.nil?
-        # redirect_to show_path
+        return unless act_params[:activity].nil?
+        redirect_to join_path
     end
 end
