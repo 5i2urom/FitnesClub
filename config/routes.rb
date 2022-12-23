@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   get 'start/show' => 'start#show'
 
   get 'join' => 'join#show'#, :as => 'user_root'
+  
+  get 'join/service' => 'join#service', :as => 'service'
 
   get 'join/act' => 'join#act', :as => 'act'
 
-  get 'join/service' => 'join#service', :as => 'service'
-
+  get 'join/path' => 'join#path', :as => 'path'
 
 
 

@@ -25,6 +25,9 @@ class JoinController < ApplicationController
     p $record
   end
 
+  def club
+  end
+
   def service_params
     params.permit(:service)
   end
