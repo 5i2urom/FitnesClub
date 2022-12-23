@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'join/club' => 'join#club', :as => 'club'
 
+  get 'join/calendar' => 'join#calendar', :as => 'calendar'
+
 
 
 end

@@ -2,11 +2,13 @@ class JoinController < ApplicationController
   include JoinHelper
 
   before_action :redirect_if_empty, except: [:show, :service]
-  before_action :before_show, only: :show
+  before_action :set_empty, only: :show
   before_action :before_service, only: :service
-  before_action :before_act, only: :act
+  before_action :before_act, only: [:act, :club]
+  #before_action :before_club, only: :club
+  before_action :before_calendar, only: :calendar
 
-  before_action :authenticate_user!, only: [:club]
+  before_action :authenticate_user!, only: [:club, :calendar]
  
 
   def show
@@ -15,19 +17,24 @@ class JoinController < ApplicationController
   end
 
   def service 
-    $record[:service] = service_params[:service] if not $record&.has_key?(:service) # если пришел спереди, не перезаписывать
+    $record[:service] = service_params[:service] if !$record&.has_key?(:service)
                                                               #если сервис уже записан, не перезаписывать 
     p $record
-
-    #session[:return_to] ||= request.referer
   end
 
   def act
-    $record[:activity] = act_params[:activity] if not $record&.has_key?(:activity)
+    $record[:activity] = act_params[:activity] if !$record&.has_key?(:activity)
     p $record
   end
 
   def club
+    p $record
+    p '000000000000000000'
+  end
+
+  def calendar
+    $record[:club] = club_params[:club] if !$record&.has_key?(:club)
+    p $record
   end
 
   def service_params
@@ -36,5 +43,9 @@ class JoinController < ApplicationController
 
   def act_params
     params.permit(:activity)
+  end
+
+  def club_params
+    params.permit(:club)
   end
 end
