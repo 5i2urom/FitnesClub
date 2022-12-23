@@ -15,7 +15,8 @@
   <header>
   <nav class="navbar navbar-light bg-light">
     <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
-      <% if true %>        
+      <% if true %>
+            <li><%= link_to 'О нас', root_path, class: 'nav-link px-2' %></li>        
             <li><%= link_to 'Услуги', join_path, class: 'nav-link px-2' %></li>
             <li><%= link_to 'Тренеры', root_path, class: 'nav-link px-2' %></li>
       <% end %>
@@ -23,17 +24,19 @@
 
     <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
       <% if false %>
-          <span class="navbar-brand mb-0 h1"><%= current_user.name %></span>          
-          <li><%= link_to 'Выйти', root_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'quit_button' %></li>
+          <span class="navbar-brand mb-0 h1"><%= current_user.email %></span>          
+          <li><%= link_to 'Выйти', destroy_user_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'quit_button' %></li>
       <% else %>
-          <li><%= link_to 'Регистрация', root_path, class: 'nav-link px-2' %></li>
-          <li><%= link_to 'Вход', root_path, class: 'nav-link px-2' %></li>
+          <li><%= link_to 'Регистрация', new_user_registration_path, class: 'nav-link px-2' %></li>
+          <li><%= link_to 'Вход', new_user_session_path, class: 'nav-link px-2' %></li>
       <% end %>
     </ul>
   </nav>
   </header>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 
