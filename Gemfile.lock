@@ -169,6 +169,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.4)
       loofah (~> 2.19, >= 2.19.1)
+    rails-i18n (7.0.6)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.4)
       actionpack (= 7.0.4)
       activesupport (= 7.0.4)
@@ -208,6 +211,8 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
+    simple_calendar (2.4.3)
+      rails (>= 3.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -249,7 +254,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
@@ -261,8 +265,10 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails-controller-testing
+  rails-i18n
   rspec-rails (~> 6.0, >= 6.0.1)
   shoulda-matchers
+  simple_calendar (~> 2.4)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

@@ -30,8 +30,9 @@ gem 'faker'
 
 gem 'devise'
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem 'bcrypt', '~> 3.1.7'
+gem "simple_calendar", "~> 2.4"
+
+gem 'rails-i18n'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
