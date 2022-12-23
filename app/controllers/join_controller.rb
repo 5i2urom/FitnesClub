@@ -13,7 +13,7 @@ class JoinController < ApplicationController
   end
 
   def service 
-    $record[:service] = service_params[:service] if not $record.has_key?(:service) # если пришел спереди, не перезаписывать
+    $record[:service] = service_params[:service] if not $record&.has_key?(:service) # если пришел спереди, не перезаписывать
                                                               #если сервис уже записан, не перезаписывать 
     p $record
 
@@ -21,7 +21,7 @@ class JoinController < ApplicationController
   end
 
   def act
-    $record[:activity] = act_params[:activity] if not $record.has_key?(:activity)
+    $record[:activity] = act_params[:activity] if not $record&.has_key?(:activity)
     p $record
   end
 
