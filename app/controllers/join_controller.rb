@@ -5,6 +5,8 @@ class JoinController < ApplicationController
   before_action :before_show, only: :show
   before_action :before_service, only: :service
   before_action :before_act, only: :act
+
+  before_action :authenticate_user!, only: [:club]
  
 
   def show

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'join/act' => 'join#act', :as => 'act'
 
-  get 'join/path' => 'join#path', :as => 'path'
+  get 'join/club' => 'join#club', :as => 'club'
 
 
 
