@@ -13,13 +13,21 @@ class StartController < ApplicationController
       len = clubs.length.clone
       coaches = service_act.coaches
       coaches.each do |coach|
-        from = '26-12-2022'
-        to = '31-12-2022'
+        #from = '26-12-2022'
+        #to = '31-12-2022'
+        dec = '-12-2022'
         (26..31).each do |i|
-          rand_len=rand(len)
-          rec = coach.calendar_records.new(start_time: )
-          rec.club = clubs[rand_len]
-          rec.save
+          beg = %w[10:30 12:30 14:30]
+          #finish = %w[12:30 14:30 16:30]
+          beg.each do |beg_each|
+            end_each = beg_each.clone
+            end_each[1] = (end_each[1].to_i + 2).to_s
+            rand_len=rand(len)
+            rec = coach.calendar_records.new(start_time: Date.parse(i.to_s+dec+beg_each),
+             end_time: Date.parse(i.to_s+dec+end_each))
+            rec.club = clubs[rand_len]
+            rec.save
+          end
         end
       end
     end
