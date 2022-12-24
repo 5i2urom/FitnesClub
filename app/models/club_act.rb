@@ -1,6 +1,6 @@
 class ClubAct < ApplicationRecord
   belongs_to :club
-  belongs_to :service_act
+  belongs_to :act
 
-  validates_uniqueness_of :club_id, scope: :service_act_id 
+  validates_uniqueness_of :club_id, scope: :act_id 
 end

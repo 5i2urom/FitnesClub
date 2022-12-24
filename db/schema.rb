@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_24_022157) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_24_150732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acts", force: :cascade do |t|
+    t.string "activity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "service_id"
+    t.index ["service_id"], name: "index_acts_on_service_id"
+  end
 
   create_table "calendar_records", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_022157) do
     t.bigint "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.bigint "act_id"
+    t.index ["act_id"], name: "index_calendar_records_on_act_id"
     t.index ["club_id"], name: "index_calendar_records_on_club_id"
     t.index ["coach_id"], name: "index_calendar_records_on_coach_id"
     t.index ["user_id"], name: "index_calendar_records_on_user_id"
@@ -29,11 +39,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_022157) do
 
   create_table "club_acts", force: :cascade do |t|
     t.bigint "club_id", null: false
-    t.bigint "service_act_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "act_id"
+    t.index ["act_id"], name: "index_club_acts_on_act_id"
     t.index ["club_id"], name: "index_club_acts_on_club_id"
-    t.index ["service_act_id"], name: "index_club_acts_on_service_act_id"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -49,14 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_022157) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "service_act_id"
+    t.bigint "act_id"
+    t.index ["act_id"], name: "index_coaches_on_act_id"
     t.index ["name"], name: "index_coaches_on_name", unique: true
-    t.index ["service_act_id"], name: "index_coaches_on_service_act_id"
   end
 
-  create_table "service_acts", force: :cascade do |t|
-    t.string "service", null: false
-    t.string "activity", null: false
+  create_table "services", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
