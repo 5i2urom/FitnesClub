@@ -10,6 +10,14 @@ class StartController < ApplicationController
     # Service.create!(name: "Игры")
     # Service.create!(name: "Групповые тренировки")
 
+    # Services.all.each do |service|
+    # end
+    # Service.all.each do |service|
+    #   (1..4).each do |x|
+    #     service.acts.create() if service.act.id==x
+    #   end
+    # end
+
     # Clubs.all.each do |club|
     #   @rec = club.calendar_records.new()
     # end

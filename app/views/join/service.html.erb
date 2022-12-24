@@ -1,7 +1,8 @@
 <% service = $record[:service] %>
 <h1 class="mb-4"> <%= service %> </h1>
 
-<% ServiceAct.select(:activity).where(service: service).each do |i| %>
+<% Service.find_by(name: service).acts.each do |i|%>
+<% #ServiceAct.select(:activity).where(service: service).each do |i| %>
 <% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>
     
 <div> <%= render file %> </div>

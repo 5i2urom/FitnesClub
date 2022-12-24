@@ -19,6 +19,7 @@ class JoinController < ApplicationController
   def service 
     $record[:service] = service_params[:service] if !$record&.has_key?(:service)
                                                               #если сервис уже записан, не перезаписывать 
+    p '------------'                                                            
     p $record
   end
 
