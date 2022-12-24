@@ -4,6 +4,12 @@ class StartController < ApplicationController
   before_action :set_empty
 
   def show
+    
+    # Service.create!(name: "Бассейн")
+    # Service.create!(name: "Тренажёрный зал")
+    # Service.create!(name: "Игры")
+    # Service.create!(name: "Групповые тренировки")
+
     # Clubs.all.each do |club|
     #   @rec = club.calendar_records.new()
     # end

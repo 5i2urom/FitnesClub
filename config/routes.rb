@@ -10,22 +10,15 @@ Rails.application.routes.draw do
 
   get 'start/show' => 'start#show'
 
-  # resources :calendar_records, only: show do
-  #   resources :service_acts, only: show do
-  #     resources :clubs, only: show
-  #   end
-  # end  
-
-  # get 'calendar_record' => 'calendar_record#show'#, :as => 'user_root'
+  get 'join' => 'join#show'#, :as => 'user_root'
   
-  # get 'calendar_record/service' => 'calendar_record#service', :as => 'service'
+  get 'join/service' => 'join#service', :as => 'service'
 
-  # get 'calendar_record/act' => 'calendar_record#act', :as => 'act'
+  get 'join/act' => 'join#act', :as => 'act'
 
-  # get 'calendar_record/club' => 'calendar_record#club', :as => 'club'
+  get 'join/club' => 'join#club', :as => 'club'
 
-  # get 'calendar_record/calendar' => 'calendar_record#calendar', :as => 'calendar'
-
+  get 'join/calendar' => 'join#calendar', :as => 'calendar'
 
 
 end

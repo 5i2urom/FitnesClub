@@ -1,4 +1,4 @@
-class CalendarRecord < ApplicationRecord
+class Join < ApplicationRecord
     #belongs_to :service_act
     belongs_to :club
     belongs_to :coach

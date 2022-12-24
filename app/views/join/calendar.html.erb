@@ -1,0 +1,21 @@
+<%= month_calendar(events: @data) do |date, data| %>
+    <div class="day">
+        <%= date.day %>
+    </div>
+    <% data.each do |data| %>
+        <%if data.club.name==$record[:club]%>
+            <div class="card-header">
+                <div>                
+                    <%= data.coach.name%>
+                    <%= data.start_time.strftime("%H:%M")%>
+                    <%= data.end_time.strftime("%H:%M")%>
+                </div>
+                <%# && data.coach==$record[:coach] %>
+            </div>
+        <%end%>
+    <% end %>
+
+
+<% end %>
+
+<%= button_to 'Назад', {action: "club"}, method: 'get', local: true, class: "btn btn-secondary" %>``

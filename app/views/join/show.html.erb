@@ -1,0 +1,7 @@
+<h1 class="mb-4">Услуги</h1>
+
+<% Service.all.each do |i| %>
+    <% file = "join/service/#{transl[i.name]}" %>     
+    <div> <%= render file %> </div>
+    <%= link_to i.name, act_path(:service => i.name), class: 'nav-link px-2' %></li>  
+<% end %>
