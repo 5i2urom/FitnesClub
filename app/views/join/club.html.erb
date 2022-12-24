@@ -1,7 +1,6 @@
 <% act = $record[:activity] %>
 Выберите клуб для занятия: <% act %> <br>
-<% Club.joins(club_acts: :service_act).where("service_acts.activity = ?", $record[:activity]).distinct.each do |club| %>
-    <% club.name %>
+<% Club.joins(club_acts: :act).where("acts.activity = ?", $record[:activity]).distinct.each do |club| %>
 
     <% file = "join/clubs/#{transl[club.name]}" %>    
     <div> <%= render file %> </div>
