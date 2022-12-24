@@ -1,4 +1,3 @@
 <%= form_with url: club_path, data: {turbo: false}, method: :get do |form| %>
-    <%#= form.hidden_field :act, :value => $record[:activity] %>
     <%= form.submit("Записаться", class: 'btn btn-primary')%>
 <% end %>

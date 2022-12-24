@@ -2,7 +2,7 @@ class JoinController < ApplicationController
   include JoinHelper
 
   before_action :redirect_if_empty, except: [:show, :service]
-  before_action :set_empty, only: :show
+  before_action :set_empty, only: [:show, :service]
   before_action :before_service, only: :service
   before_action :before_act, only: [:act, :club]
   #before_action :before_club, only: :club
@@ -12,11 +12,10 @@ class JoinController < ApplicationController
  
 
   def show
-    $record = Hash.new(4)
     p $record 
   end
 
-  def service 
+  def service
     $record[:service] = service_params[:service] if !$record&.has_key?(:service)
                                                               #если сервис уже записан, не перезаписывать 
     p '------------'                                                            

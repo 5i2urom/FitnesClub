@@ -15,7 +15,7 @@ module JoinHelper
 
     def set_empty
         #[:service, :activity, :club, :coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        $record = nil
+        $record = Hash.new(4)
     end
 
     def before_service
