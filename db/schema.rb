@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_232719) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_24_022157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "calendar_records", force: :cascade do |t|
-    t.string "start_time"
-    t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "club_id"
     t.bigint "coach_id"
     t.bigint "user_id"
+    t.date "start_time"
+    t.date "end_time"
     t.index ["club_id"], name: "index_calendar_records_on_club_id"
     t.index ["coach_id"], name: "index_calendar_records_on_coach_id"
     t.index ["user_id"], name: "index_calendar_records_on_user_id"

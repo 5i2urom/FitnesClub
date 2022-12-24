@@ -13,16 +13,15 @@ class StartController < ApplicationController
       len = clubs.length.clone
       coaches = service_act.coaches
       coaches.each do |coach|
-        rand_len=rand(len)
-        CalendarRecord
-        rec = coach.calendar_records.new()
-        rec.club = clubs[rand_len]
-        rec.save
-        #clubs[rand_len].calendar_records.new()
-        #coach.calendar_records.save
-        #clubs[rand_len].calendar_records.save
+        from = '26-12-2022'
+        to = '31-12-2022'
+        (26..31).each do |i|
+          rand_len=rand(len)
+          rec = coach.calendar_records.new(start_time: )
+          rec.club = clubs[rand_len]
+          rec.save
+        end
       end
-      #CalendarRecord.save
     end
 
   end
