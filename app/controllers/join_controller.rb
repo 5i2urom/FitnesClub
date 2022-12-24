@@ -34,6 +34,11 @@ class JoinController < ApplicationController
 
   def calendar
     $record[:club] = club_params[:club] if !$record&.has_key?(:club)
+
+    @data = CalendarRecord.where(
+      start_time: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
+    )
+
     p $record
   end
 

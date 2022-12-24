@@ -1,7 +1,14 @@
-<%= month_calendar(events: ) do |date| %>
+<%= month_calendar(events: @data) do |date, data| %>
     <div class="day">
         <%= date.day %>
     </div>
+    <% data.each do |data| %>
+        <div class="card-header">
+            <%= data.start_time if data.club==$record[:club] && data.coach==$record[:coach] %>
+        </div>
+    <% end %>
+
+
 <% end %>
 
 <%= button_to 'Назад', {action: "club"}, method: 'get', local: true, class: "btn btn-secondary" %>

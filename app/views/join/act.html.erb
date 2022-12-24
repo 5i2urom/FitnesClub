@@ -1,7 +1,7 @@
-<% act = @record[:activity] %>
+<% act = $record[:activity] %>
 <h1 class="mb-4"> <%= act %> </h1>
 
-<% file = "join/#{transl[@record[:service]]}_acts/#{transl[act]}" %>    
+<% file = "join/#{transl[$record[:service]]}_acts/#{transl[act]}" %>    
 <div> <%= render file %> </div>
 
 <div> <%= render 'join/set' %> </div>
