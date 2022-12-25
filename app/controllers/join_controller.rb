@@ -34,9 +34,15 @@ class JoinController < ApplicationController
   def calendar
     $record[:club] = club_params[:club] if !$record&.has_key?(:club)
 
-    @data = CalendarRecord.where(
+    records = CalendarRecord.where(
       start_time: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
     )
+
+
+    @records_need = []
+    records.each do |record|
+      @records_need.push(record) if record.club.name==$record[:club] && record.coach.act.activity==$record[:activity] 
+    end
 
     p $record
   end
