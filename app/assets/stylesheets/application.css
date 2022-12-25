@@ -13,3 +13,69 @@
  *= require_tree .
  *= require_self
  */
+
+ .form-group {
+    max-width: 500px;
+     }
+  nav.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+    }
+  .descr {
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 20px 320px auto 30px;                
+  }
+
+  .start-image {
+    margin: 25px 320px auto 30px; 
+  }
+
+  .simple-calendar {
+    max-width: 1000px;
+    max-height: 10rem;
+    background-color: rgb(157, 223, 223);
+    }
+
+  .simple-calendar .day {
+     height: 130px;
+     width: 110px;
+     background-color: rgb(157, 223, 223);
+     font-family: "Optima, sans-serif";
+     font-weight: bold; 
+    }
+
+  .simple-calendar .wday-6 {color: red;}
+  .simple-calendar .wday-0 {color: red;}
+  
+  .simple-calendar .today {background-color: burlywood;}
+  .simple-calendar .prev-month {
+    color: grey;
+    font-weight: normal;
+  }
+  .simple-calendar .next-month {
+    color: grey;
+    font-weight: normal;
+   }
+
+   .simple-calendar .calendar-heading {
+    display: flex;
+    justify-content: center;
+   }
+
+   .table .table-striped {
+    display: flex;
+    justify-content: center;
+   }
+
+    .past {}
+    .future {}  
+    .start-date {}
+  
+
+   
+    .current-month {}
+  
+    .has-events {}
+
+

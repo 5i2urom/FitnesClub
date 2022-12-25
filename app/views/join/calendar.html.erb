@@ -1,20 +1,22 @@
-<%= month_calendar(events: @records_need) do |date, records_need| %>
-    <div class="day">
+<%= month_calendar(events: @records_need) do |date, records_need| %> 
+    <div class="my-day">
         <%= date.day %>
     </div>
-
-    <div class="card-body"> 
-        <%records_need.each do |rec|%>
-        <% p rec.start_time.strftime("%e")%>
-        <% p date.day%>
-            <%if rec.start_time.strftime("%e").to_i==date.day%>
-                <%= rec.coach.name%>
-                <%= rec.start_time.strftime("%H:%M")%>
-                <%= rec.end_time.strftime("%H:%M")%>
+        <h6 class="my-day-events"> 
+        <% @my_coaches.each do |coach|%>
+            <%first = true%> 
+            <%records_need.each do |r|%>
+                <%if r.coach.name==coach%>
+                    <%if first%>
+                        <ul><%= coach %>
+                    <%end%>                        
+                    <li><%=r.start_time.strftime("%H:%M") + '-' + r.end_time.strftime("%H:%M")%></li>
+                    <%first = false%>
+                <%end %>                    
             <%end%>
+            </ul>
         <%end%>
-    </div>     
-        <%# <div class="card-header"> %>
+        </h6>
 <% end %>
 
 <%= button_to 'Назад', {action: "club"}, method: 'get', local: true, class: "btn btn-secondary" %>``
