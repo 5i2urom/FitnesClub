@@ -10,12 +10,9 @@
                     <%= data.start_time.strftime("%H:%M")%>
                     <%= data.end_time.strftime("%H:%M")%>
                 </div>
-                <%# && data.coach==$record[:coach] %>
             </div>
-        <%end%>
+        <% end %>
     <% end %>
-
-
 <% end %>
 
 <%= button_to 'Назад', {action: "club"}, method: 'get', local: true, class: "btn btn-secondary" %>``

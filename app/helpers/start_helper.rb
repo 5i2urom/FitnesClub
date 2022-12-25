@@ -1,5 +1,5 @@
 module StartHelper
     def set_empty
-        $record = nil
+        $record = Hash.new(4)
     end
 end

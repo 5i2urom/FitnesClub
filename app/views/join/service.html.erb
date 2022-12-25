@@ -1,19 +1,30 @@
 <% service = $record[:service] %>
-<h1 class="mb-4"> <%= service %> </h1>
-
-<% Service.find_by(name: service).acts.each do |i|%>
-<% #ServiceAct.select(:activity).where(service: service).each do |i| %>
-<% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>
-    
-<div> <%= render file %> </div>
-<%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2' %></li>  
-<% end %>
-
-<%= button_to 'Назад', {action: "show"}, method: 'get', local: true, class: "btn btn-secondary" %>
-
-<%# <script>
-//     alert(performance.navigation.type)
-//     if(performance.navigation.type == 0) {
-//    location.reload(true);
-// }
-</script> %>
+<div class="row justify-content-between">
+    <div class=col-5>
+         <%= link_to join_path do %>
+            <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
+        <% end %>
+    </div>
+    <div class=col-7>
+        <h1 style> <%= service %> </h1>
+    </div>
+</div>
+<br><br>
+<div class="row justify-content-between">
+    <% Service.find_by(name: service).acts.each do |i|%>
+        <div class=col-6>
+            <div class="card" style="width: 35rem; height: 45rem; margin: auto">
+                <%= image_tag "#{transl[i.activity]}.jpg", size: "300x330", class: "card-img-top", :alt => "service img" %> 
+                <div class="card-body">
+                    <h3 class="card-title", style="text-align:center">
+                        <%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2' %>
+                    </h3>               
+                    <p class="card text">
+                        <% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>   
+                        <div> <%= render file %> </div>
+                    </p>
+                </div>
+            </div> 
+        </div> 
+    <% end %>
+</div>  

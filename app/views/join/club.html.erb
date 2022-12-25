@@ -1,13 +1,19 @@
 <% act = $record[:activity] %>
-Выберите клуб для занятия: <% act %> <br>
-<% Club.joins(club_acts: :act).where("acts.activity = ?", $record[:activity]).distinct.each do |club| %>
 
-    <% file = "join/clubs/#{transl[club.name]}" %>    
-    <div> <%= render file %> </div>
+<div class="row justify-content-between">
+    <div class=col-2>
+         <%= link_to act_path do %>
+            <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
+        <% end %>
+    </div>
+    <div class=col-10>
+        <h1 style> Выберите клуб для занятия: <%= act %> </h1>
+    </div>
+</div>
 
-    <%= link_to "Выбрать", calendar_path(:club => club.name), class: 'nav-link px-2' %></li> 
-    <%# button_to 'Выбрать', {action: "calendar"}, method: 'get', local: true, class: "btn btn-primary" %>   
 
-<% end %>
-
-<%= button_to 'Назад', {action: "act"}, method: 'get', local: true, class: "btn btn-secondary" %>
+<div class="row justify-content-between">
+    <% Club.joins(club_acts: :act).where("acts.activity = ?", $record[:activity]).distinct.each do |club| %>
+        <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2' %></li> 
+    <% end %>
+</div>
