@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   get 'user/profile'
 
+  post 'user/rec_destroy' => 'user#rec_destroy', :as => 'rec_destroy'
+
   root 'start#show'
 
   get 'start/show' => 'start#show'
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
   get 'join/calendar' => 'join#calendar', :as => 'calendar'
 
   post 'join/write' => 'join#write', :as => 'write'
+
+  
 
 
 end
