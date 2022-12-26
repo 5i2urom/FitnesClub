@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_many :calendar_records
+  has_many :calendar_records, through: :user_records
 
+  validates_presence_of :name, :email, :encrypted_password
+  validates_uniqueness_of :email
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

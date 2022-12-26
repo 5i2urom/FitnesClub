@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_24_193048) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_26_153944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_193048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "service_id"
+    t.index ["activity"], name: "index_acts_on_activity", unique: true
     t.index ["service_id"], name: "index_acts_on_service_id"
   end
 
@@ -27,12 +28,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_193048) do
     t.datetime "updated_at", null: false
     t.bigint "club_id"
     t.bigint "coach_id"
-    t.bigint "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.index ["club_id"], name: "index_calendar_records_on_club_id"
     t.index ["coach_id"], name: "index_calendar_records_on_coach_id"
-    t.index ["user_id"], name: "index_calendar_records_on_user_id"
+    t.index ["end_time"], name: "index_calendar_records_on_end_time"
+    t.index ["start_time"], name: "index_calendar_records_on_start_time"
   end
 
   create_table "club_acts", force: :cascade do |t|
@@ -66,6 +67,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_193048) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_services_on_name", unique: true
+  end
+
+  create_table "user_records", force: :cascade do |t|
+    t.bigint "calendar_record_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_record_id"], name: "index_user_records_on_calendar_record_id"
+    t.index ["user_id"], name: "index_user_records_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

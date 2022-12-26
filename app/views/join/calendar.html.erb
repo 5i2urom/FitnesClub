@@ -25,15 +25,16 @@
                     <% first = false %>
                     <% my_start = r.start_time.strftime("%H:%M") %> 
                     <% my_end = r.end_time.strftime("%H:%M") %>
-                    <% my_start_id = my_start.gsub(':', '-')%>
-                    <% my_end_id = my_start.gsub(':', '-')%>
-                    <% coach_id = coach.gsub(' ', '_')%>
-                    <% my_date = date.strftime('%d-%m-%Y') %>                    
+                    <% my_id = r.id%>
+                    <%# my_start_id = my_start.gsub(':', '-')%>
+                    <%# my_end_id = my_start.gsub(':', '-')%>
+                    <%# coach_id = coach.gsub(' ', '_')%>
+                    <%# my_date = date.strftime('%d-%m-%Y') %>                    
                                              
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=coach_id%>Z<%=my_date%>Z<%=my_start_id%>Z<%=my_end_id%>">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
                         <%= my_start + '-' + my_end%>
                     </button>
-                    <div class="modal fade" id="<%=coach_id%>Z<%=my_date%>Z<%=my_start_id%>Z<%=my_end_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -50,14 +51,19 @@
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
                             Тренер: <%=coach%> <br>
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Дата: <%=my_date%> <br>
+                            Дата: <%=date%> <br>
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
                             Время: <%=my_start + '-' + my_end%>
                    
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="SubmitRecord('<%=coach_id%>','<%=my_date%>','<%=my_start_id%>','<%=my_end_id%>')">Подтвердить</button> 
+                            <%= form_with url: write_path do |f|%>
+                                <%= f.hidden_field :my_id, :value => my_id%>
+                                <%= f.hidden_field :my_start, :value => my_start%>
+                                <%= f.hidden_field :my_end, :value => my_end%>
+                                <%= f.submit("Подтвердить", class: "btn btn-success", id:"submit#{my_id}", onclick:"SubmitRecord(#{my_id})")%>
+                            <% end %> 
                         </div>
                         </div>
                     </div>
@@ -67,12 +73,17 @@
         <%end%>
         </h6>
 <% end %>
-
+<div id='show-container'>
+</div>
 <script>
-    function SubmitRecord(coach_id,my_date,my_start_id,my_end_id) {
-        button_to_green = document.querySelectorAll(`[data-bs-target='#${coach_id}Z${my_date}Z${my_start_id}Z${my_end_id}']`)
+    function SubmitRecord(id) {
+        button_to_green = document.querySelectorAll(`[data-bs-target='#id${id}']`)
         button_to_green[0].className='btn btn-success'
+        button_to_green[0].disabled=true
+
+        document.getElementById(`submit${id}`).disabled=true
+
     }
-</script> 
+</script>
 
 

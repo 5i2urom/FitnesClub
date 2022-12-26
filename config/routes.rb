@@ -20,5 +20,7 @@ Rails.application.routes.draw do
 
   get 'join/calendar' => 'join#calendar', :as => 'calendar'
 
+  post 'join/write' => 'join#write', :as => 'write'
+
 
 end

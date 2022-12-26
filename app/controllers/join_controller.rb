@@ -48,6 +48,13 @@ class JoinController < ApplicationController
     p $record
   end
 
+  def write
+    @my_id = params[:my_id]
+    @my_start = params[:my_start]
+    @my_end = params[:my_end]
+    p @my_id
+  end
+
   def service_params
     params.permit(:service)
   end
