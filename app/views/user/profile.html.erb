@@ -1,2 +1,12 @@
-<h1>User#profile</h1>
-<p>Find me in app/views/user/profile.html.erb</p>
+<h3><strong>Мой профиль</strong></h3><br>
+<h3>Имя: <%= current_user.name%><h3>
+<h3>Email: <%= current_user.email%><h3>
+<ol>Мои записи:
+    <%UserRecord.where(user: current_user).each do |rec|%>
+        <li>
+            <%=rec.calendar_records%>
+            <% = CalendarRecord.joins(user_records: :user).where("user.id = ?", current_user.id)%>
+        </li>
+    <%end%>
+    
+</ol>

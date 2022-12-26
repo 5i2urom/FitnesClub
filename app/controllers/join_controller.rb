@@ -4,32 +4,35 @@ class JoinController < ApplicationController
   before_action :redirect_if_empty, except: [:show, :service]
   before_action :set_empty, only: :show
   before_action :before_service, only: :service
-  before_action :before_act, only: [:act, :club]
-  #before_action :before_club, only: :club
+  before_action :before_act, only: :act
+  before_action :before_club, only: :club
   before_action :before_calendar, only: :calendar
+  
 
   before_action :authenticate_user!, only: [:club, :calendar]
  
 
   def show
-    p $record 
+    #p $record 
   end
 
   def service
-    $record[:service] = service_params[:service] if !$record&.has_key?(:service)
-                                                              #если сервис уже записан, не перезаписывать 
-    p '------------'                                                            
-    p $record
+    p service_params[:service]
+    p $record[:service]     
+    $record[:service] = service_params[:service] if (!$record&.has_key?(:service) || service_params[:service]!=$record[:service])
+                                                              #если сервис уже записан, не перезаписывать ------ перезаписать, если сервис сменился
+   # p '------------'                                                            
+    #p $record
   end
 
   def act
-    $record[:activity] = act_params[:activity] if !$record&.has_key?(:activity)
-    p $record
+    $record[:activity] = act_params[:activity] if (!$record&.has_key?(:activity) || service_params[:activity]!=$record[:activity])
+    #p $record
   end
 
   def club
-    p $record
-    p current_user.id
+    #p $record
+    #p current_user.id
   end
 
   def calendar
@@ -53,7 +56,7 @@ class JoinController < ApplicationController
     @my_id = my_id_params[:my_id]
     @my_start = params[:my_start]
     @my_end = params[:my_end]
-    p @my_id
+    #p @my_id
     new_r = CalendarRecord.find_by(id: @my_id).user_records.new(user: current_user)
     # new_r = UserRecord.new(calendar_record: @r, user: current_user)
     new_r.valid? ? new_r.save : flash[:alert] = "Вы уже записаны!"

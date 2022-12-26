@@ -1,0 +1,15 @@
+<turbo-stream action="replace" target="button<%=@my_id%>">
+  <template>
+        <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
+            <%= @my_start + '-' + @my_end%>
+        </button>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="submit<%=@my_id%>">
+  <template>
+        <button type="button" style="pointer-events:none;" class="btn btn-success">
+            Успешно
+        </button>
+  </template>
+</turbo-stream>

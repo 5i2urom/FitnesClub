@@ -25,15 +25,17 @@
                     <% first = false %>
                     <% my_start = r.start_time.strftime("%H:%M") %> 
                     <% my_end = r.end_time.strftime("%H:%M") %>
-                    <% my_id = r.id%>
-                    <%# my_start_id = my_start.gsub(':', '-')%>
-                    <%# my_end_id = my_start.gsub(':', '-')%>
-                    <%# coach_id = coach.gsub(' ', '_')%>
-                    <%# my_date = date.strftime('%d-%m-%Y') %>                    
-                                             
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
-                        <%= my_start + '-' + my_end%>
-                    </button>
+                    <% my_id = r.id%>                 
+
+                    <% unless UserRecord.find_by(calendar_record_id: my_id, user: current_user) %>                        
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                            <%= my_start + '-' + my_end%>
+                        </button>
+                    <%else%>
+                        <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
+                            <%= my_start + '-' + my_end%>
+                        </button>
+                    <%end%>
                     <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

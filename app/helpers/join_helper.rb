@@ -15,38 +15,49 @@ module JoinHelper
 
     def set_empty
         #[:service, :activity, :club, :coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        $record = Hash.new(4)
+        $record = Hash.new(3)
     end
 
     def before_service
-        [:activity, :club, :coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        # p $record
-        # p $record.has_key?(:service)
+        [:activity, :club].each { |key| $record.delete(key) if $record&.has_key?(key) }
+        #p $record
+        #p !$record.has_key?(:service)
         # p '----------'
+        #p service_params[:service].nil?
         return unless service_params[:service].nil? && !$record&.has_key?(:service) #нет параметров и записи в хэш - редирект
-        p 'aaaaaaaaaa'
-        p $record
+        #p 'aaaaaaaaaa'
+        #p $record
         redirect_to join_path
     end
 
     def before_act
-        [:club, :coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        return unless act_params[:activity].nil? && !$record&.has_key?(:activity) &&
-            !$record&.has_key?(:service) # #нет параметров и записи в хэш и предыдущего- редирект
-        # p 'bbbbbbb'
+        @act = Act.find_by(activity: act_params[:activity]) #activity, которое пришло из параметров
+
+        [:club].each { |key| $record.delete(key) if $record&.has_key?(key) }
+
+        return unless (act_params[:activity].nil? && !$record&.has_key?(:activity) && 
+            !$record&.has_key?(:service)) || @act.service.name!=$record[:service] #если несоотвествие service и activity
+        redirect_to join_path
+    end
+
+    def before_club
+        [:club].each { |key| $record.delete(key) if $record&.has_key?(key) }
+
+        #p act_params[:activity].nil?
+        #p $record&.has_key?(:activity)
+        return unless (act_params[:activity].nil? && !$record&.has_key?(:activity) )
         redirect_to join_path
     end
 
     def before_calendar
-        [:coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        return unless act_params[:club].nil? && !$record&.has_key?(:activity) &&
-            !$record&.has_key?(:service) && !$record&.has_key?(:club) # #нет параметров и записи в хэш и предыдущего- редирект
+        return unless act_params[:club].nil? && (!$record&.has_key?(:activity) ||
+            !$record&.has_key?(:service) ) && !redir# #нет параметров и записи в хэш и предыдущего- редирект
         # p 'bbbbbbb'
         redirect_to join_path
     end
 
     def redirect_if_empty #если "голый" запрос
-        p $record
+        #p $record
         return unless $record&.empty?
         redirect_to join_path        
     end
