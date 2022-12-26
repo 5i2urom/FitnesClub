@@ -17,3 +17,8 @@
         <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2' %></li> 
     <% end %>
 </div>
+
+<%= form_with url: write_path do |f|%>
+    <%= f.hidden_field :r, :value => 1%>
+    <%= f.submit("Подтвердить", class: "btn btn-success")%>
+<% end %> 

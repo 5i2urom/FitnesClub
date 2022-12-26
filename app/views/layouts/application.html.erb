@@ -53,11 +53,11 @@
 
   <body>
     <% if alert %>
-      <p class="alert alert-warning"><%= alert %></p>
+      <p class="alert alert-warning" id="alert"><%= alert %></p>
     <% end %>
 
     <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
+    <p class="alert alert-success" id="notice"><%= notice %></p>
     <% end %>
     <%= yield %>
   </body>

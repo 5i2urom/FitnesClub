@@ -57,12 +57,12 @@
                    
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Выйти</button>
                             <%= form_with url: write_path do |f|%>
-                                <%= f.hidden_field :my_id, :value => my_id%>
+                                <%= f.hidden_field :my_id, :value => my_id.to_i%>
                                 <%= f.hidden_field :my_start, :value => my_start%>
                                 <%= f.hidden_field :my_end, :value => my_end%>
-                                <%= f.submit("Подтвердить", class: "btn btn-success", id:"submit#{my_id}", onclick:"SubmitRecord(#{my_id})")%>
+                                <%= f.submit("Подтвердить", class: "btn btn-primary", id:"submit#{my_id}")%>
                             <% end %> 
                         </div>
                         </div>
@@ -77,12 +77,12 @@
 </div>
 <script>
     function SubmitRecord(id) {
+        console.log('here')
         button_to_green = document.querySelectorAll(`[data-bs-target='#id${id}']`)
         button_to_green[0].className='btn btn-success'
         button_to_green[0].disabled=true
 
         document.getElementById(`submit${id}`).disabled=true
-
     }
 </script>
 

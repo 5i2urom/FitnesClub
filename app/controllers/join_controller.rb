@@ -29,6 +29,7 @@ class JoinController < ApplicationController
 
   def club
     p $record
+    p current_user.id
   end
 
   def calendar
@@ -49,10 +50,13 @@ class JoinController < ApplicationController
   end
 
   def write
-    @my_id = params[:my_id]
+    @my_id = my_id_params[:my_id]
     @my_start = params[:my_start]
     @my_end = params[:my_end]
     p @my_id
+    new_r = CalendarRecord.find_by(id: @my_id).user_records.new(user: current_user)
+    # new_r = UserRecord.new(calendar_record: @r, user: current_user)
+    new_r.valid? ? new_r.save : flash[:alert] = "Вы уже записаны!"
   end
 
   def service_params
@@ -65,5 +69,9 @@ class JoinController < ApplicationController
 
   def club_params
     params.permit(:club)
+  end
+
+  def my_id_params
+    params.permit(:my_id)
   end
 end
