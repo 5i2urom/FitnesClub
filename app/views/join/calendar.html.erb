@@ -53,7 +53,7 @@
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
                             Тренер: <%=coach%> <br>
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Дата: <%=date%> <br>
+                            Дата: <%=date.strftime("%d-%m-%Y")%> <br>
                             <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
                             Время: <%=my_start + '-' + my_end%>
                    
@@ -75,11 +75,8 @@
         <%end%>
         </h6>
 <% end %>
-<div id='show-container'>
-</div>
 <script>
     function SubmitRecord(id) {
-        console.log('here')
         button_to_green = document.querySelectorAll(`[data-bs-target='#id${id}']`)
         button_to_green[0].className='btn btn-success'
         button_to_green[0].disabled=true
