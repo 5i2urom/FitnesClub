@@ -37,16 +37,11 @@ class JoinController < ApplicationController
     records = CalendarRecord.where(
       start_time: Time.now..Time.now.end_of_month.end_of_week
     )
-
-
+    
     @records_need = []
     records.each do |record|
       @records_need.push(record) if record.club.name==$record[:club] && record.coach.act.activity==$record[:activity] 
     end
-
-    p @records_need
-
-
     @my_coaches = []
     @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name}
 

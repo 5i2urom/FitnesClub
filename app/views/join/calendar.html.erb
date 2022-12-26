@@ -1,3 +1,15 @@
+<div class="row justify-content-between">
+    <div class=col-2>
+         <%= link_to club_path do %>
+            <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
+        <% end %>
+    </div>
+    <div class=col-10>
+        <h1 style> Календарь: <%=$record[:activity]%> в <%=$record[:club]%></h1>
+    </div>
+</div>
+<br>
+<div class="my-calendar">
 <%= month_calendar(events: @records_need) do |date, records_need| %> 
     <div class="my-day">
         <%= date.day %>
@@ -8,15 +20,59 @@
             <%records_need.each do |r|%>
                 <%if r.coach.name==coach%>
                     <%if first%>
-                        <ul><%= coach %>
-                    <%end%>                        
-                    <li><%=r.start_time.strftime("%H:%M") + '-' + r.end_time.strftime("%H:%M")%></li>
-                    <%first = false%>
+                        <%= coach %>
+                    <%end%>
+                    <% first = false %>
+                    <% my_start = r.start_time.strftime("%H:%M") %> 
+                    <% my_end = r.end_time.strftime("%H:%M") %>
+                    <% my_start_id = my_start.gsub(':', '-')%>
+                    <% my_end_id = my_start.gsub(':', '-')%>
+                    <% coach_id = coach.gsub(' ', '_')%>
+                    <% my_date = date.strftime('%d-%m-%Y') %>                    
+                                             
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=coach_id%>Z<%=my_date%>Z<%=my_start_id%>Z<%=my_end_id%>">
+                        <%= my_start + '-' + my_end%>
+                    </button>
+                    <div class="modal fade" id="<%=coach_id%>Z<%=my_date%>Z<%=my_start_id%>Z<%=my_end_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Подтвердите запись</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Услуги: <%=$record[:service] %> <br>
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Занятие: <%=$record[:activity] %> <br>
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Клуб: <%=$record[:club] %> <br>
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Тренер: <%=coach%> <br>
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Дата: <%=my_date%> <br>
+                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                            Время: <%=my_start + '-' + my_end%>
+                   
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="SubmitRecord('<%=coach_id%>','<%=my_date%>','<%=my_start_id%>','<%=my_end_id%>')">Подтвердить</button> 
+                        </div>
+                        </div>
+                    </div>
+                    </div>                                                    
                 <%end %>                    
             <%end%>
-            </ul>
         <%end%>
         </h6>
 <% end %>
 
-<%= button_to 'Назад', {action: "club"}, method: 'get', local: true, class: "btn btn-secondary" %>``
+<script>
+    function SubmitRecord(coach_id,my_date,my_start_id,my_end_id) {
+        button_to_green = document.querySelectorAll(`[data-bs-target='#${coach_id}Z${my_date}Z${my_start_id}Z${my_end_id}']`)
+        button_to_green[0].className='btn btn-success'
+    }
+</script> 
+
+

@@ -33,7 +33,7 @@
 
   .simple-calendar {
     max-width: 1000px;
-    max-height: 10rem;
+    max-height: 1000px;
     background-color: rgb(157, 223, 223);
     }
 
@@ -45,9 +45,6 @@
      font-weight: bold; 
     }
 
-  .simple-calendar .wday-6 {color: red;}
-  .simple-calendar .wday-0 {color: red;}
-  
   .simple-calendar .today {background-color: burlywood;}
   .simple-calendar .prev-month {
     color: grey;
