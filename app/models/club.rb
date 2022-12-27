@@ -1,5 +1,5 @@
 class Club < ApplicationRecord
-    has_many :club_acts
+    has_many :club_acts, dependent: :destroy
     has_many :acts, through: :clubs_acts
     has_many :calendar_records, dependent: :destroy
 

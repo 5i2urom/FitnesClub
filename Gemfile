@@ -21,12 +21,7 @@ gem "puma", "~> 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
-gem 'rails-controller-testing'
 gem 'rspec-rails', '~> 6.0', '>= 6.0.1'
-
-gem 'shoulda-matchers'
-
-gem 'faker'
 
 gem 'devise'
 
@@ -83,5 +78,9 @@ end
 group :test do
   gem 'capybara'
   gem 'webdrivers'
+
+  gem 'rails-controller-testing' # гем для тестирования контроллеров (нам нужен метод assigns)
+  gem 'faker' # гем для генерирования случайных данных
+  gem 'shoulda-matchers'
 end
 
