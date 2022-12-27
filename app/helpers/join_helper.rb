@@ -14,19 +14,12 @@ module JoinHelper
     private
 
     def set_empty
-        #[:service, :activity, :club, :coach].each { |key| $record.delete(key) if $record&.has_key?(key) }
         $record = Hash.new(3)
     end
 
     def before_service
         [:activity, :club].each { |key| $record.delete(key) if $record&.has_key?(key) }
-        #p $record
-        #p !$record.has_key?(:service)
-        # p '----------'
-        #p service_params[:service].nil?
         return unless service_params[:service].nil? && !$record&.has_key?(:service) #нет параметров и записи в хэш - редирект
-        #p 'aaaaaaaaaa'
-        #p $record
         redirect_to join_path
     end
 
@@ -42,9 +35,6 @@ module JoinHelper
 
     def before_club
         [:club].each { |key| $record.delete(key) if $record&.has_key?(key) }
-
-        #p act_params[:activity].nil?
-        #p $record&.has_key?(:activity)
         return unless (act_params[:activity].nil? && !$record&.has_key?(:activity) )
         redirect_to join_path
     end
@@ -52,13 +42,19 @@ module JoinHelper
     def before_calendar
         return unless act_params[:club].nil? && (!$record&.has_key?(:activity) ||
             !$record&.has_key?(:service) ) && !redir# #нет параметров и записи в хэш и предыдущего- редирект
-        # p 'bbbbbbb'
         redirect_to join_path
     end
 
-    def redirect_if_empty #если "голый" запрос
-        #p $record
+    def redirect_if_empty
+        p $record
         return unless $record&.empty?
         redirect_to join_path        
     end
+    
+    def redirect_if_nil
+        p $record
+        return unless $record.nil?
+        redirect_to start_show_path        
+    end
+    
 end

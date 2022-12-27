@@ -1,6 +1,7 @@
 class JoinController < ApplicationController
   include JoinHelper
 
+  before_action :redirect_if_nil, only: [:show, :service]
   before_action :redirect_if_empty, except: [:show, :service]
   before_action :set_empty, only: :show
   before_action :before_service, only: :service
@@ -12,27 +13,20 @@ class JoinController < ApplicationController
   before_action :authenticate_user!, only: [:club, :calendar]
  
 
-  def show
-    #p $record 
+  def show 
   end
 
   def service
-    p service_params[:service]
-    p $record[:service]     
+    p service_params[:service] 
     $record[:service] = service_params[:service] if (!$record&.has_key?(:service) || service_params[:service]!=$record[:service])
                                                               #если сервис уже записан, не перезаписывать ------ перезаписать, если сервис сменился
-   # p '------------'                                                            
-    #p $record
   end
 
   def act
     $record[:activity] = act_params[:activity] if (!$record&.has_key?(:activity) || service_params[:activity]!=$record[:activity])
-    #p $record
   end
 
   def club
-    #p $record
-    #p current_user.id
   end
 
   def calendar
