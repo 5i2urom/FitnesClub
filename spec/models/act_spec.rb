@@ -3,8 +3,16 @@ require 'rails_helper'
 RSpec.describe Act, type: :model do
   describe 'validations' do
     let!(:act_data) { {activity: Faker::Lorem.word}}
-    let!(:add1) {Act.create(act_data)}
-    let!(:add2) {Act.new(act_data)}
+    let!(:add1) {described_class.create(act_data)}
+    let!(:add2) {described_class.new(act_data)}
+
+    it 'doesnt adds and gets data without foreign key' do
+      act = Faker::Lorem.word
+      data = described_class.new(activity: act)
+      expect(data.save).to eq(false)
+      expect(described_class.find_by(activity: act).present?).to eq(false)
+    end
+
 
     it 'created repeated act record' do
       expect(add2.valid?).to eq(false)

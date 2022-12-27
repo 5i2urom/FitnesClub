@@ -3,17 +3,17 @@ require 'rails_helper'
 RSpec.describe Service, type: :model do
   describe 'validations' do
     let!(:serv_data) { {name: Faker::Lorem.word}}
-    let!(:add1) {Service.create(serv_data)}
-    let!(:add2) {Service.new(serv_data)}
+    let!(:add1) {described_class.create(serv_data)}
+    let!(:add2) {described_class.new(serv_data)}
 
     it 'adds and gets data' do
       name = Faker::Lorem.word
-      data = Service.new(name: name)
+      data = described_class.new(name: name)
       expect(data.save).to eq(true)
-      expect(Service.find_by(name: name).present?).to eq(true)
+      expect(described_class.find_by(name: name).present?).to eq(true)
     end
 
-    it 'created repeated service record' do
+    it 'created repeated described_class record' do
       expect(add2.valid?).to eq(false)
     end
 
