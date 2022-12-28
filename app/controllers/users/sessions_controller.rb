@@ -18,7 +18,7 @@ module Users
         resource = warden.authenticate!(scope: resource_name, recall: 'new')
         session['resource_email'] = resource.email
         session['resource_name'] = resource.name
-        flash[:notice] = "Добро пожаловать, #{session['resource_name']}!"
+        flash[:notice] = "#{t('session.create.welcome')}, #{session['resource_name']}!"
         sign_in_and_redirect(resource_name, resource)
       else
         render 'layouts/incorrect'
@@ -29,7 +29,7 @@ module Users
     def destroy
       name = current_user.name.clone
       super
-      flash[:notice] = "До встречи, #{name}!"
+      flash[:notice] = "#{t('session.destroy.come_back')}, #{name}!"
     end
 
     # If you have extra params to permit, append them to the sanitizer.

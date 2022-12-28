@@ -1,10 +1,10 @@
 <div class="row justify-content-between">
-    <div class=col-2>
+    <div style="display: flex; justify-content:flex-start;">
          <%= link_to club_path do %>
             <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
         <% end %>
     </div>
-    <div class=col-10>
+    <div style="display: flex; justify-content:center;">
         <h1 style> Календарь: <%=$record[:activity]%> в <%=$record[:club]%></h1>
     </div>
 </div>

@@ -1,11 +1,11 @@
 <% act = $record[:activity] %>
 <div class="row justify-content-between">
-    <div class=col-5>
+    <div style="display: flex; justify-content:flex-start;">
          <%= link_to service_path(:service => $record[:service]), id: "back" do %>
             <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
         <% end %>
     </div>
-    <div class=col-7>
+    <div style="display: flex; justify-content:center">
         <h1 style> <%= act %> </h1>
     </div>
 </div>

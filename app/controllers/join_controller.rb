@@ -13,10 +13,10 @@ class JoinController < ApplicationController
 
   before_action :authenticate_user!, only: %i[club calendar]
 
-  def show; end
+  def show;
+  end
 
   def service
-    p service_params[:service]
     return unless !$record&.key?(:service) || service_params[:service] != $record[:service]
 
     $record[:service] =
@@ -49,8 +49,6 @@ class JoinController < ApplicationController
     end
     @my_coaches = []
     @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name }
-
-    p $record
   end
 
   def write

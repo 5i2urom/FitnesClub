@@ -52,14 +52,12 @@ module JoinHelper
   end
 
   def redirect_if_empty
-    p $record
     return unless $record&.empty?
 
     redirect_to join_path
   end
 
   def redirect_if_nil
-    p $record
     return unless $record.nil?
 
     redirect_to start_show_path

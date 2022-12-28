@@ -1,18 +1,34 @@
 <% act = $record[:activity] %>
+<% service = $record[:service] %>
 
 <div class="row justify-content-between">
-    <div class=col-2>
+    <div style="display: flex; justify-content:flex-start;">
          <%= link_to act_path(:activity => act), id: "back" do %>
             <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад", id: 'back' %>
         <% end %>
     </div>
-    <div class=col-10>
+    <div style="display: flex; justify-content:center;">
         <h1 style> Выберите клуб для занятия: <%= act %> </h1>
     </div>
-</div>
+</div> <br>
 
 <div class="row justify-content-between">
     <% Club.joins(club_acts: :act).where("acts.activity = ?", $record[:activity]).distinct.each do |club| %>
-        <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2', id: 'club'%></li> 
+        <div class=col-6>
+            <div class="card" style="width: 35rem; height: 45rem; margin: auto">
+                <% img_url = "#{transl[club.name]}.jpg"%>
+                <% ex = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}")%>
+                <% img_file = ex ? img_url : 'сlub.jpg'%>
+                <%= image_tag img_file, size: "300x330", class: "card-img-top", :alt => "service img" %> 
+                <div class="card-body">
+                    <h3 class="card-title", style="text-align:center">
+                        <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2', id: 'club'%>
+                    </h3>              
+                    <p class="card text">
+                        <% file = "join/clubs/#{transl[club.name]}" %>   
+                        <div> <% if ex%> <%= render file %> <%else%> Информация о клубе <%end%></div>
+                    </p>
+                </div>
+            </div> 
+        </div> 
     <% end %>
-</div>

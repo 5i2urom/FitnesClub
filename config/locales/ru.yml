@@ -1,0 +1,37 @@
+ru:
+  header:
+    service: "Услуги"
+    about: "О нас"
+    profile: "Профиль"
+    reg: "Регистрация"
+    enter: "Вход"
+    exit: "Выход"
+  profile:
+    my: 'Мой профиль'
+    name: 'Имя'
+    email: 'Email'
+    my_recs: 'Мои записи'
+    cancel: 'Отменить запись'
+  session:
+    create:
+      welcome: 'Добро пожаловать'
+    destroy:
+      come_back: 'До встречи'
+  user:
+    sign_in:
+      enter: "Вход"
+      email: 'Email'
+      password: 'Пароль'
+      remember_me: "Запомнить меня"
+      enter_account: "Войти в аккаунт"
+    sign_up:
+      reg: 'Регистрация'
+      name: 'Имя'
+      email: 'Email'
+      password: 'Пароль'
+      password_repeat: 'Подтвердите пароль'
+
+      has_acc: "Уже есть аккаунт? Войдите"
+      has_no_acc: "Еще нет аккаунта? Зарегистрируйтесь!"
+      
+

@@ -1,27 +1,27 @@
-<h2>Вход</h2>
+<h2><%= t('user.sign_in.enter') %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field form-group">
     <% f.label :email %><br />
-    <%= f.email_field :email, class: "form-control", placeholder: "Email",
+    <%= f.email_field :email, class: "form-control", placeholder: t('user.sign_in.email'),
     autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field form-group">
     <% f.label :password %><br />
-    <%= f.password_field :password, class: "form-control", placeholder: "Пароль", 
+    <%= f.password_field :password, class: "form-control", placeholder: t('user.sign_in.password'), 
     autocomplete: "current-password" %>
   </div>
   <br>
   <% if devise_mapping.rememberable? %>
     <div class="field form-check">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, value: "Запомнить меня" %>
+      <%= f.label :remember_me, value: t('user.sign_in.remember_me') %>
     </div>
   <% end %>
   <br>
   <div class="actions">
-    <%= f.submit "Войти в аккаунт", class: 'btn btn-secondary' %>
+    <%= f.submit t('user.sign_in.enter_account'), class: 'btn btn-secondary' %>
   </div>
 <% end %>
 
