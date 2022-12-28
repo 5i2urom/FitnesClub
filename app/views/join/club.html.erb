@@ -18,8 +18,8 @@
             <div class="card" style="width: 35rem; height: 45rem; margin: auto">
                 <% img_url = "#{transl[club.name]}.jpg"%>
                 <% ex = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}")%>
-                <% img_file = ex ? img_url : 'сlub.jpg'%>
-                <%= image_tag img_file, size: "300x330", class: "card-img-top", :alt => "service img" %> 
+                <% img_file = ex ? img_url : 'club.jpg' %>
+                <%= image_tag img_file, style: "margin-left: 10px", size: "300x330", class: "card-img-top", :alt => "club img" %> 
                 <div class="card-body">
                     <h3 class="card-title", style="text-align:center">
                         <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2', id: 'club'%>
