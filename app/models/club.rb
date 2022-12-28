@@ -9,6 +9,6 @@ class Club < ApplicationRecord
   validates :address, presence: { message: 'не может быть пустым' }
   validates_uniqueness_of :name
   validates_uniqueness_of :address
-  validates :name, format: { with: /\A([a-zа-я]+(\s)?)+\z/i, message: 'должно быть строкой' }
+  validates :name, format: { with: /\A([a-zа-яё]+(\s)?)+\z/i, message: 'должно быть строкой' }
   validates :address, format: { with: /[[:alnum:]]/, message: 'должно состоять из букв и цифр' }
 end

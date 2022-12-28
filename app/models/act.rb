@@ -8,5 +8,5 @@ class Act < ApplicationRecord
 
   validates :activity, presence: { message: 'не может быть пустым' }
   validates_uniqueness_of :activity
-  validates :activity, format: { with: /\A([a-z]+(\s)?)+\z/i, message: 'должно быть строкой' }
+  validates :activity, format: { with: /\A([a-zа-яё]+(\s)?)+\z/i, message: 'должно быть строкой' }
 end
