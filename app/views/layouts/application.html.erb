@@ -26,7 +26,7 @@
               <li class="nav-item"><%= link_to 'О нас', root_path, class: 'nav-link px-2' %></li>        
               <li class="nav-item">
                 <div class="dropdown">
-                  <%= link_to 'Услуги', join_path, class: 'nav-link px-2' %>
+                  <%= link_to 'Услуги', join_path, class: 'nav-link px-2', id: 'servs' %>
                     <ul class="dropdown-menu">
                         <% Service.all.each do |i| %>
                           <%= link_to i.name, service_path(:service => i.name), class: 'nav-link px-2' %></li>  

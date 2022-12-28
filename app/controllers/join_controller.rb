@@ -1,7 +1,7 @@
 class JoinController < ApplicationController
   include JoinHelper
 
-  before_action :redirect_if_nil, only: [:show, :service]
+  before_action :redirect_if_nil
   before_action :redirect_if_empty, except: [:show, :service]
   before_action :set_empty, only: :show
   before_action :before_service, only: :service

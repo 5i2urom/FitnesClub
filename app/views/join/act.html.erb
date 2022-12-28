@@ -1,7 +1,7 @@
 <% act = $record[:activity] %>
 <div class="row justify-content-between">
     <div class=col-5>
-         <%= link_to service_path(:service => $record[:service]) do %>
+         <%= link_to service_path(:service => $record[:service]), id: "back" do %>
             <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
         <% end %>
     </div>
@@ -12,13 +12,15 @@
 <br>
 <div class="row justify-content-between">
     <div class=col-5>
-        <%= image_tag "#{transl[act]}.jpg", style: "margin-left: 10px", size: "650x500", :alt => "service img" %> 
+        <% img_url = "#{transl[act]}.jpg"%>
+        <% img_file = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}") ? img_url : 'act.jpg'%>
+        <%= image_tag img_file, style: "margin-left: 10px", size: "650x500", :alt => "service img" %> 
     </div>
     <div class=col-6>
         <% file = "join/#{transl[$record[:service]]}_acts/#{transl[act]}" %> 
         <div class="container"  style="margin-right: 50px; position: relative; top: 30%;"> 
             <div> <%= render file %> </div>
-            <div> <%= link_to 'Записаться', club_path,  class: "btn btn-primary" %>  </div>
+            <div> <%= link_to 'Записаться', club_path,  class: "btn btn-primary", id: "zap"%> </div>
         </div>
     </div>
 </div>

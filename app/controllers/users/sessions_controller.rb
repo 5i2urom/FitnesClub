@@ -26,7 +26,7 @@ class Users::SessionsController < Devise::SessionsController
 
   #DELETE /resource/sign_out
   def destroy
-    name = session["resource_name"]
+    name = current_user.name.clone
     super 
     flash[:notice] = "До встречи, #{name}!"  
   end 

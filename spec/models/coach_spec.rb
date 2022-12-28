@@ -6,13 +6,6 @@ RSpec.describe Coach, type: :model do
     let!(:add1) {described_class.create(coach_data)}
     let!(:add2) {described_class.new(coach_data)}
 
-    it 'doesnt adds and gets data without foreign key' do
-      name = Faker::Lorem.word
-      data = described_class.new(name: name)
-      expect(data.save).to eq(false)
-      expect(described_class.find_by(name: name).present?).to eq(false)
-    end
-
     it 'created repeated described_class record' do
       expect(add2.valid?).to eq(false)
     end
