@@ -1,47 +1,54 @@
+# frozen_string_literal: true
+
 class JoinController < ApplicationController
   include JoinHelper
 
   before_action :redirect_if_nil
-  before_action :redirect_if_empty, except: [:show, :service]
+  before_action :redirect_if_empty, except: %i[show service]
   before_action :set_empty, only: :show
   before_action :before_service, only: :service
   before_action :before_act, only: :act
   before_action :before_club, only: :club
   before_action :before_calendar, only: :calendar
-  
 
-  before_action :authenticate_user!, only: [:club, :calendar]
- 
+  before_action :authenticate_user!, only: %i[club calendar]
 
-  def show 
-  end
+  def show; end
 
   def service
-    p service_params[:service] 
-    $record[:service] = service_params[:service] if (!$record&.has_key?(:service) || service_params[:service]!=$record[:service])
-                                                              #если сервис уже записан, не перезаписывать ------ перезаписать, если сервис сменился
+    p service_params[:service]
+    return unless !$record&.key?(:service) || service_params[:service] != $record[:service]
+
+    $record[:service] =
+      service_params[:service]
+
+    # если сервис уже записан, не перезаписывать ------ перезаписать, если сервис сменился
   end
 
   def act
-    $record[:activity] = act_params[:activity] if (!$record&.has_key?(:activity) || service_params[:activity]!=$record[:activity])
+    return unless !$record&.key?(:activity) || service_params[:activity] != $record[:activity]
+
+    $record[:activity] =
+      act_params[:activity]
   end
 
-  def club
-  end
+  def club; end
 
   def calendar
-    $record[:club] = club_params[:club] if !$record&.has_key?(:club)
+    $record[:club] = club_params[:club] unless $record&.key?(:club)
 
     records = CalendarRecord.where(
       start_time: Time.now..Time.now.end_of_month.end_of_week
     )
-    
+
     @records_need = []
     records.each do |record|
-      @records_need.push(record) if record.club.name==$record[:club] && record.coach.act.activity==$record[:activity] 
+      if record.club.name == $record[:club] && record.coach.act.activity == $record[:activity]
+        @records_need.push(record)
+      end
     end
     @my_coaches = []
-    @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name}
+    @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name }
 
     p $record
   end
@@ -51,7 +58,7 @@ class JoinController < ApplicationController
     @my_start = params[:my_start]
     @my_end = params[:my_end]
     new_r = CalendarRecord.find_by(id: @my_id).user_records.new(user: current_user)
-    new_r.valid? ? new_r.save : flash[:alert] = "Вы уже записаны!"
+    new_r.valid? ? new_r.save : flash[:alert] = 'Вы уже записаны!'
   end
 
   private

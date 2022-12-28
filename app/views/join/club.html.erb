@@ -3,7 +3,7 @@
 <div class="row justify-content-between">
     <div class=col-2>
          <%= link_to act_path(:activity => act), id: "back" do %>
-            <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад" %>
+            <%= image_tag "back.png", style: "margin-left: 55px",size: "40x40", :alt => "Назад", id: 'back' %>
         <% end %>
     </div>
     <div class=col-10>
@@ -13,6 +13,6 @@
 
 <div class="row justify-content-between">
     <% Club.joins(club_acts: :act).where("acts.activity = ?", $record[:activity]).distinct.each do |club| %>
-        <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2' %></li> 
+        <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2', id: 'club'%></li> 
     <% end %>
 </div>

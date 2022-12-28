@@ -19,7 +19,7 @@
                 <%= image_tag img_file, class: "card-img-top", :alt => "service img" %>
                 <div class="card-body">
                     <h3 class="card-title", style="text-align:center">
-                        <%= link_to i.name, service_path(:service => i.name), class: 'nav-link px-2', id: transl[i.name]%>
+                        <%= link_to i.name, service_path(:service => i.name), class: 'nav-link px-2', id: 'serv'%>
                     </h3>
                     <p class="card text">
                         <% file = "join/service/#{transl[i.name]}" %>    

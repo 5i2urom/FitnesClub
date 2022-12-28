@@ -15,15 +15,16 @@
         <div class=col-6>
             <div class="card" style="width: 35rem; height: 45rem; margin: auto">
                 <% img_url = "#{transl[i.activity]}.jpg"%>
-                <% img_file = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}") ? img_url : 'service.jpg'%>
+                <% ex = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}")%>
+                <% img_file = ex ? img_url : 'service.jpg'%>
                 <%= image_tag img_file, size: "300x330", class: "card-img-top", :alt => "service img" %> 
                 <div class="card-body">
                     <h3 class="card-title", style="text-align:center">
-                        <%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2', id: transl[i.activity] %>
+                        <%= link_to i.activity, act_path(:activity => i.activity), class: 'nav-link px-2', id: 'act' %>
                     </h3>               
                     <p class="card text">
                         <% file = "join/#{transl[service]}_acts/#{transl[i.activity]}" %>   
-                        <div> <%= render file %> </div>
+                        <div> <% if ex%> <%= render file %> <%else%> Информация об услуге <%end%></div>
                     </p>
                 </div>
             </div> 

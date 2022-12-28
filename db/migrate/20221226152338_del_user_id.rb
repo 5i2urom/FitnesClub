@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DelUserId < ActiveRecord::Migration[7.0]
   def change
     remove_reference :calendar_records, :user

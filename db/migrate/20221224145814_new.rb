@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class New < ActiveRecord::Migration[7.0]
   def change
     add_reference :coaches, :act
