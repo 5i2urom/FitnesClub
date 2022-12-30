@@ -25,6 +25,7 @@
                         <%= link_to club.name, calendar_path(:club => club.name), class: 'nav-link px-2', id: 'club'%>
                     </h3>              
                     <p class="card text">
+                        Адрес: <%= club.address %>
                         <% file = "join/clubs/#{transl[club.name]}" %>   
                         <div> <% if ex%> <%= render file %> <%else%> Информация о клубе <%end%></div>
                     </p>

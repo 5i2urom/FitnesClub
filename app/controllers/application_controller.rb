@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# app
 class ApplicationController < ActionController::Base
   before_action :configure_sign_up_params, if: :devise_controller?
 

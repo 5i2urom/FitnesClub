@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# join
+# rubocop:disable Style/GlobalVars
 class JoinController < ApplicationController
   include JoinHelper
 
@@ -13,8 +15,7 @@ class JoinController < ApplicationController
 
   before_action :authenticate_user!, only: %i[club calendar]
 
-  def show;
-  end
+  def show; end
 
   def service
     return unless !$record&.key?(:service) || service_params[:service] != $record[:service]
@@ -34,11 +35,12 @@ class JoinController < ApplicationController
 
   def club; end
 
+  # rubocop: disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
   def calendar
     $record[:club] = club_params[:club] unless $record&.key?(:club)
 
     records = CalendarRecord.where(
-      start_time: Time.now..Time.now.end_of_month.end_of_week
+      start_time: 5.days.ago..Time.now.end_of_month.end_of_week
     )
 
     @records_need = []
@@ -50,6 +52,7 @@ class JoinController < ApplicationController
     @my_coaches = []
     @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name }
   end
+  # rubocop: enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
 
   def write
     @my_id = my_id_params[:my_id]
@@ -77,3 +80,4 @@ class JoinController < ApplicationController
     params.permit(:my_id)
   end
 end
+# rubocop:enable Style/GlobalVars

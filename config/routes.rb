@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'start/show' => 'start#show'
 
-  get 'join' => 'join#show' # , :as => 'user_root'
+  get 'join' => 'join#show'
 
   get 'join/service' => 'join#service', :as => 'service'
 

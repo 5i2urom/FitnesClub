@@ -1,17 +1,10 @@
 # frozen_string_literal: true
 
 module Users
+  # sessions
   class SessionsController < Devise::SessionsController
-    # before_action :configure_sign_in_params, only: [:create]
-
-    # GET /resource/sign_in
-    # def new
-    #   super
-    #   flash[:notice] = "Добро пожаловать, #{session["resource_name"]}!"
-
-    #  end
-
     # POST /resource/sign_in
+    # rubocop:disable Metrics/AbcSize
     def create
       user = User.find_for_authentication(email: params[:user][:email])
       if user.present? && user&.valid_password?(params[:user][:password])
@@ -24,6 +17,7 @@ module Users
         render 'layouts/incorrect'
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # DELETE /resource/sign_out
     def destroy
@@ -31,10 +25,5 @@ module Users
       super
       flash[:notice] = "#{t('session.destroy.come_back')}, #{name}!"
     end
-
-    # If you have extra params to permit, append them to the sanitizer.
-    # def configure_sign_in_params
-    #   devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
-    # end
   end
 end
