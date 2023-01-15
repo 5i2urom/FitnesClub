@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_14_192337) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_15_214244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,9 +30,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_14_192337) do
     t.bigint "coach_id"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer "limit"
     t.index ["club_id"], name: "index_calendar_records_on_club_id"
     t.index ["coach_id"], name: "index_calendar_records_on_coach_id"
     t.index ["end_time"], name: "index_calendar_records_on_end_time"
+    t.index ["limit"], name: "index_calendar_records_on_limit"
     t.index ["start_time"], name: "index_calendar_records_on_start_time"
   end
 

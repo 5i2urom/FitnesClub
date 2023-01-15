@@ -1,4 +1,4 @@
-# frozen_string_literal: true1
+# frozen_string_literal: true
 
 # start
 class StartController < ApplicationController
