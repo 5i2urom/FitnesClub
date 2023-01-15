@@ -40,7 +40,7 @@ class JoinController < ApplicationController
     $record[:club] = club_params[:club] unless $record&.key?(:club)
 
     records = CalendarRecord.where(
-      start_time: 5.days.ago..Time.now.end_of_month.end_of_week
+      start_time: Time.now..(Time.now+1.month).end_of_month.end_of_week
     )
 
     @records_need = []
@@ -49,8 +49,6 @@ class JoinController < ApplicationController
         @records_need.push(record)
       end
     end
-    @my_coaches = []
-    @records_need.each { |r| @my_coaches.push(r.coach.name) unless @my_coaches.include? r.coach.name }
   end
   # rubocop: enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
 

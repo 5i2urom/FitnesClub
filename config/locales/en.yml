@@ -6,12 +6,17 @@ en:
     reg: "Sign up"
     enter: "Sign in"
     exit: "Exit"
+    timetable: "Timetable"
   profile:
     my: 'My profile'
     name: 'Name'
     email: 'Email'
     my_recs: 'My records'
     cancel: 'Cancel record'
+    status: 'Status'
+    сoach: 'Coach'
+    student: 'Student'
+    spec: 'Speciality'
   session:
     create:
       welcome: 'Welcome'

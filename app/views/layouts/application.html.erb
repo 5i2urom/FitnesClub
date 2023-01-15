@@ -40,7 +40,12 @@
         <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
           <% if user_signed_in? %>
               <span class="navbar-brand mb-0 h1"><%= current_user.name %></span>
-              <li><%= link_to t('header.profile'), user_profile_path, class: 'nav-link px-2' %></li>        
+
+              <% if Coach.find_by(user_id: current_user&.id) %>
+                  <li><%= link_to t('header.timetable'), coach_timetable_path, class: 'nav-link px-2' %></li>
+                <% end %> 
+                <li><%= link_to t('header.profile'), user_profile_path, class: 'nav-link px-2' %></li>      
+
               <li><%= link_to t('header.exit'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'quit_button' %></li>
           <% else %>
               <li><%= link_to t('header.reg'), new_user_registration_path, class: 'nav-link px-2' %></li>

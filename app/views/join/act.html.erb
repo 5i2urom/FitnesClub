@@ -16,14 +16,16 @@
         <% ex = File.exists?("/home/roman/Documents/Prog/Projects/FitnesClub2/app/assets/images/#{img_url}")%>
         <% img_file = ex ? img_url : 'act.jpg'%>
         <%= image_tag img_file, style: "margin-left: 10px", size: "650x500", :alt => "service img" %> 
-    </div>
+    </div>        
     <div class=col-6>
         <% file = "join/#{transl[$record[:service]]}_acts/#{transl[act]}" %> 
         <div class="container"  style="margin-right: 50px; position: relative; top: 30%;"> 
             <div> <% if ex%> <%= render file %> <%else%> Информация о занятии <%end%></div>
-            <div> <%= link_to 'Записаться', club_path,  class: "btn btn-primary", id: "zap"%> </div>
+            <% unless Coach.find_by(user_id: current_user&.id) && current_user.present? %>
+                <div> <%= link_to 'Записаться', club_path,  class: "btn btn-primary", id: "zap"%> </div>
+            <% end %>
         </div>
-    </div>
+    </div>    
 </div>
 
 

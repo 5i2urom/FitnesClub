@@ -6,12 +6,17 @@ ru:
     reg: "Регистрация"
     enter: "Вход"
     exit: "Выход"
+    timetable: "Расписание"
   profile:
     my: 'Мой профиль'
     name: 'Имя'
     email: 'Email'
     my_recs: 'Мои записи'
     cancel: 'Отменить запись'
+    status: 'Статус'
+    сoach: 'Тренер'
+    student: 'Студент'
+    spec: 'Специальность'
   session:
     create:
       welcome: 'Добро пожаловать'

@@ -1,0 +1,86 @@
+<div class="row justify-content-between">
+    <div style="display: flex; justify-content:center;">
+        <h1 style> Моё расписание</h1>
+    </div>
+</div>
+<br>
+<div class="my-calendar">
+<%= month_calendar(events: @records_need) do |date, records_need| %>
+    <div class="my-day">
+        <%= date.day %>
+    </div>
+        <h6 class="my-day-events"> 
+        <% my_clubs=[] %>
+        <% records_need.each do |r|%>
+            <% my_start = r.start_time.strftime("%H:%M") %> 
+            <% my_end = r.end_time.strftime("%H:%M") %>
+            <% my_id = r.id%>
+
+            <% unless my_clubs.include?(r.club.name) %>
+                <div style="font-weight:bold; text-decoration:underline;"> <%= r.club.name%> </div>
+                <% my_clubs.push(r.club.name)%>
+            <% end%>
+
+            <% my_users = User.joins(user_records: :calendar_record).where("calendar_records.id= ?", r.id)%>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                <%= my_start + '-' + my_end%>
+            </button>
+            <div>
+                Записаны: <span id="calendar<%=r.id%>count1"><%=my_users.length%></span>/3                
+            </div>
+            <br>
+            <% my_users.first.name if my_users.any?%>
+
+            <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Запись</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="font-size:120%;">
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Клуб: <%= r.club.name %> <br>
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Дата: <%=date.strftime("%d-%m-%Y")%> <br>
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Время: <%= my_start + '-' + my_end%> <br>
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Количество мест:<br>
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Записаны: <span id="calendar<%=r.id%>count2"><%=my_users.length %></span> <br>
+                                    <% if my_users.any? %>
+                                        <ol style='margin-left: 50px'>
+                                            <% my_users.each do |user| %>
+                                                <div id="user<%=user.id%>calendar<%=r.id%>">
+                                                <% p "user#{user.id}calendar#{r.id}"%>
+                                                <li>
+                                                <%= user.name %>
+                                                    <%= form_with url: coach_rec_destroy_path do |f|%>
+                                                        <%= f.hidden_field :user_id, :value => user.id%>
+                                                        <%= f.hidden_field :calendar_id, :value => r.id%>
+                                                        <%= f.hidden_field :users_length, :value => my_users.length%>
+                                                        <% delete = 'Удалить'%>
+                                                        <%= f.submit(delete, class: "btn btn-danger")%>
+                                                    <% end %>
+                                                </li>
+                                                </div>
+                                            <% end %>
+                                        </ol>
+                                    <% end %>
+                                <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
+                                    Осталось мест:
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">ОК</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end%>        
+        </h6>
+<% end %>
+</div>
+
+

@@ -4,7 +4,15 @@
 class UserController < ApplicationController
   before_action :authenticate_user!
 
-  def profile; end
+  def profile
+    @coach = Coach.find_by(user_id: current_user&.id)
+    case 
+    when @coach.present?
+      @status = t('profile.сoach')
+    else
+      @status = t('profile.student')
+    end
+  end
 
   def rec_destroy
     @my_id = rec_destroy_params[:my_id]

@@ -59,7 +59,7 @@ RSpec.describe 'join', type: :system do
     find('#club').click
     sleep(2)
     expect(page).to have_text("Календарь: #{act_name} в #{club_name}")
-    expect(page).to have_text('декабря 2022')
+    expect(page).to have_text('января 2022')
     expect(page).to have_text(coach_name)
 
     click_button(my_time)

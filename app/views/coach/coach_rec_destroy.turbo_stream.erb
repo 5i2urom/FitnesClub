@@ -1,0 +1,14 @@
+<turbo-stream action="remove" target="user<%=@user_id%>calendar<%=@calendar_id%>">
+</turbo-stream>
+
+<turbo-stream action="replace" target="calendar<%=@calendar_id%>count1">
+    <template>
+        <span id="calendar<%=@calendar_id%>count1"><%=@users_length.to_i-1%></span>
+    </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="calendar<%=@calendar_id%>count2">
+    <template>
+        <span id="calendar<%=@calendar_id%>count2"><%=@users_length.to_i-1%></span>
+    </template>
+</turbo-stream>

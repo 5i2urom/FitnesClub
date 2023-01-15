@@ -1,0 +1,43 @@
+<h6><% if UserRecord.find_by(user: current_user).present?%></h6>
+            <% arr = []%>
+                <%CalendarRecord.joins(user_records: :user).where("user_id = ?", current_user.id).each do |r|%>
+                    <% my_start = r.start_time.strftime("%H:%M") %> 
+                    <% my_end = r.end_time.strftime("%H:%M") %>
+                    <% my_date = r.start_time.strftime("%d-%m-%Y")%>
+                    <% to_push = []%>
+                    <% to_push[0] = r.coach.act.service.name%>
+                    <% to_push[1] = r.coach.act.activity%>
+                    <% to_push[2] = r.club.name%>
+                    <% to_push[3] = r.coach.name%>
+                    <% to_push[4] = my_date%>
+                    <% to_push[5] = my_start%>
+                    <% to_push[6] = my_end%>
+                    <% to_push[7] = r.id%>
+                    
+                    <%# to_push=[r.coach.act.service.name, r.coach.act.activity, r.club.name, r.coach.name, my_date,
+                            my_start + '-' + my_end]%>
+                    <% arr.push(to_push)%>
+                <%end%>
+                <%arr.sort_by!{|serv, act, club, coach, date, t_start, t_end, my_id| [date, t_start]}%>
+                <ol>
+                    <% arr.each do |my_r|%>
+                        <div id="id<%=my_r[7]%>" style='margin-left: 50px'>
+                            <li>
+                                Услуги: <%= my_r[0]%> <br>
+                                Занятие: <%= my_r[1]%> <br>
+                                Клуб: <%= my_r[2] %> <br>
+                                Тренер: <%= my_r[3]%> <br>
+                                Дата: <%=my_r[4]%> <br>
+                                Время: <%= my_r[5]+ '-' + my_r[6]%>
+                            </li>
+                            <%= form_with url: rec_destroy_path do |f|%>
+                                <%= f.hidden_field :my_id, :value => my_r[7]%>
+                                <% cancel = t('profile.cancel')%>
+                                <%= f.submit(cancel, class: "btn btn-danger")%>
+                            <% end %> 
+                            <br>
+                        </div>
+                    <%end%>                
+                </ol>
+        <% else %> <h3 style='margin-left: 50px'> У вас еще нет записей </h3>
+        <% end %>

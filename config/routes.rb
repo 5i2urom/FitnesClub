@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -24,4 +25,9 @@ Rails.application.routes.draw do
   get 'join/calendar' => 'join#calendar', :as => 'calendar'
 
   post 'join/write' => 'join#write', :as => 'write'
+
+  get 'coach/timetable'
+
+  post 'coach/coach_rec_destroy' => 'coach#coach_rec_destroy', :as => 'coach_rec_destroy' 
+
 end

@@ -15,63 +15,59 @@
         <%= date.day %>
     </div>
         <h6 class="my-day-events"> 
-        <% @my_coaches.each do |coach|%>
-            <%first = true%> 
-            <%records_need.each do |r|%>
-                <%if r.coach.name==coach%>
-                    <%if first%>
-                        <%= coach %>
-                    <%end%>
-                    <% first = false %>
-                    <% my_start = r.start_time.strftime("%H:%M") %> 
-                    <% my_end = r.end_time.strftime("%H:%M") %>
-                    <% my_id = r.id%>                 
-
-                    <% unless UserRecord.find_by(calendar_record_id: my_id, user: current_user) %>                        
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
-                            <%= my_start + '-' + my_end%>
-                        </button>
-                    <%else%>
-                        <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
-                            <%= my_start + '-' + my_end%>
-                        </button>
-                    <%end%>
-                    <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Подтвердите запись</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Услуги: <%=$record[:service] %> <br>
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Занятие: <%=$record[:activity] %> <br>
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Клуб: <%=$record[:club] %> <br>
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Тренер: <%=coach%> <br>
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Дата: <%=date.strftime("%d-%m-%Y")%> <br>
-                            <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
-                            Время: <%=my_start + '-' + my_end%>
-                   
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Выйти</button>
-                            <%= form_with url: write_path do |f|%>
-                                <%= f.hidden_field :my_id, :value => my_id.to_i%>
-                                <%= f.hidden_field :my_start, :value => my_start%>
-                                <%= f.hidden_field :my_end, :value => my_end%>
-                                <%= f.submit("Подтвердить", class: "btn btn-primary", id:"submit#{my_id}")%>
-                            <% end %> 
-                        </div>
-                        </div>
-                    </div>
-                    </div>                                                    
-                <%end %>                    
+        <% my_coaches=[] %>
+        <%records_need.each do |r|%>
+            <% unless my_coaches.include?(r.coach.name) %>
+                <div> <%= r.coach.name%> </div>
+                <% my_coaches.push(r.coach.name)%>
             <%end%>
+            <% my_start = r.start_time.strftime("%H:%M") %> 
+            <% my_end = r.end_time.strftime("%H:%M") %>
+            <% my_id = r.id%>                 
+
+            <% unless UserRecord.find_by(calendar_record_id: my_id, user: current_user) %>                        
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                    <%= my_start + '-' + my_end%>
+                </button>
+            <%else%>
+                <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
+                    <%= my_start + '-' + my_end%>
+                </button>
+            <%end%>
+            <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Подтвердите запись</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Услуги: <%=$record[:service] %> <br>
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Занятие: <%=$record[:activity] %> <br>
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Клуб: <%=$record[:club] %> <br>
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Тренер: <%=r.coach.name%> <br>
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Дата: <%=date.strftime("%d-%m-%Y")%> <br>
+                    <%= image_tag "galka.png", size: "50x50", :alt => "Галка" %>
+                    Время: <%=my_start + '-' + my_end%>
+            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Выйти</button>
+                    <%= form_with url: write_path do |f|%>
+                        <%= f.hidden_field :my_id, :value => my_id.to_i%>
+                        <%= f.hidden_field :my_start, :value => my_start%>
+                        <%= f.hidden_field :my_end, :value => my_end%>
+                        <%= f.submit("Подтвердить", class: "btn btn-primary", id:"submit#{my_id}")%>
+                    <% end %> 
+                </div>
+                </div>
+            </div>
+            </div>                                                                      
         <%end%>
         </h6>
 <% end %>
