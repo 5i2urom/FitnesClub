@@ -27,7 +27,7 @@
                 <%= my_start + '-' + my_end%>
             </button>
             <div>
-                Записаны: <span id="calendar<%=r.id%>count1"><%=my_users.length%></span>/3                
+                Записаны: <span id="calendar<%=r.id%>count1"><%=my_users.length%></span>/<%=r.limit%>         
             </div>
             <br>
             <% my_users.first.name if my_users.any?%>
@@ -47,7 +47,7 @@
                                 <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
                                     Время: <%= my_start + '-' + my_end%> <br>
                                 <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
-                                    Количество мест:<br>
+                                    Количество мест: <%=r.limit%> <br>
                                 <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
                                     Записаны: <span id="calendar<%=r.id%>count2"><%=my_users.length %></span> <br>
                                     <% if my_users.any? %>
@@ -70,7 +70,7 @@
                                         </ol>
                                     <% end %>
                                 <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
-                                    Осталось мест:
+                                    Осталось мест: <%=r.limit - my_users.length%>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">ОК</button>

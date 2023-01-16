@@ -39,15 +39,16 @@ module JoinHelper
 
   def before_club
     [:club].each { |key| $record.delete(key) if $record&.key?(key) }
-    p !Coach.find_by(user_id: current_user&.id)
-    p act_params[:activity].nil? && !$record&.key?(:activity) && !Coach.find_by(user_id: current_user&.id)
-    return unless act_params[:activity].nil? && !$record&.key?(:activity) || Coach.find_by(user_id: current_user&.id)
+    p '----------------------'
+    p current_user&.id
+    p act_params[:activity].nil? && !$record&.key?(:activity) || Coach.find_by(user_id: current_user&.id).present?
+    return unless act_params[:activity].nil? && !$record&.key?(:activity) || Coach.find_by(user_id: current_user&.id).present? && current_user.present?
     redirect_to join_path
   end
 
   def before_calendar
     return unless act_params[:club].nil? && (!$record&.key?(:activity) ||
-        !$record&.key?(:service)) && !redir || Coach.find_by(user_id: current_user&.id) # #нет параметров и записи в хэш и предыдущего- редирект
+        !$record&.key?(:service)) && !redir || Coach.find_by(user_id: current_user&.id).present? && current_user.present? # #нет параметров и записи в хэш и предыдущего- редирект
 
     redirect_to join_path
   end

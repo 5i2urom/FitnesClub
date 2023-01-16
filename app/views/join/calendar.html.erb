@@ -18,21 +18,28 @@
         <% my_coaches=[] %>
         <%records_need.each do |r|%>
             <% unless my_coaches.include?(r.coach.name) %>
-                <div> <%= r.coach.name%> </div>
+                <div style="font-weight:bold; text-decoration:underline;"> <%= r.coach.name%> </div>
                 <% my_coaches.push(r.coach.name)%>
             <%end%>
             <% my_start = r.start_time.strftime("%H:%M") %> 
             <% my_end = r.end_time.strftime("%H:%M") %>
             <% my_id = r.id%>                 
-
-            <% unless UserRecord.find_by(calendar_record_id: my_id, user: current_user) %>                        
+            <% users_len = UserRecord.where(calendar_record_id: my_id).length %>
+            <% if users_len >= r.limit%>
+                <button type="button" style="pointer-events:none;" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                    <%= my_start + '-' + my_end%>
+                </button>
+                <p>Запись закрыта</p>
+            <% elsif UserRecord.find_by(calendar_record_id: my_id, user: current_user).nil? %>                        
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
                     <%= my_start + '-' + my_end%>
                 </button>
+                <p id="p<%=my_id%>">Свободно <%=r.limit - users_len%>/<%=r.limit%></p>
             <%else%>
                 <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
                     <%= my_start + '-' + my_end%>
                 </button>
+                <p>Вы записаны</p>
             <%end%>
             <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
