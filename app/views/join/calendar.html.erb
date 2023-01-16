@@ -25,22 +25,24 @@
             <% my_end = r.end_time.strftime("%H:%M") %>
             <% my_id = r.id%>                 
             <% users_len = UserRecord.where(calendar_record_id: my_id).length %>
-            <% if users_len >= r.limit%>
-                <button type="button" style="pointer-events:none;" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
-                    <%= my_start + '-' + my_end%>
-                </button>
-                <p>Запись закрыта</p>
-            <% elsif UserRecord.find_by(calendar_record_id: my_id, user: current_user).nil? %>                        
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
-                    <%= my_start + '-' + my_end%>
-                </button>
-                <p id="p<%=my_id%>">Свободно <%=r.limit - users_len%>/<%=r.limit%></p>
-            <%else%>
+
+            <% if UserRecord.find_by(calendar_record_id: my_id, user: current_user)%>            
                 <button type="button" style="pointer-events:none;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#id<%=@my_id%>" id="button<%=@my_id%>">
                     <%= my_start + '-' + my_end%>
                 </button>
                 <p>Вы записаны</p>
+            <% elsif users_len >= r.limit%>
+                <button type="button" style="pointer-events:none;" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                    <%= my_start + '-' + my_end%>
+                </button>
+                <p>Запись закрыта</p>
+            <% else %>                        
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=my_id%>" id="button<%=my_id%>">
+                    <%= my_start + '-' + my_end%>
+                </button>
+                <p id="p<%=my_id%>">Свободно <%=r.limit - users_len%>/<%=r.limit%></p>
             <%end%>
+            
             <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

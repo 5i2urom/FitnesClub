@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'complaint/new'
+  post 'complaint/add'
+  get 'complaint/history'
+  get 'complaint/active'
+  get 'complaint/archive'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'

@@ -7,6 +7,12 @@ ru:
     enter: "Вход"
     exit: "Выход"
     timetable: "Расписание"
+    feedback: "Обратная связь"
+    new_complaint: "Новая жалоба"
+    history_complaint: "История жалоб"
+    complaints: "Обращения"
+    active_comlaints: "Активные жалобы"
+    archive_comlaints: "Архив"
   profile:
     my: 'Мой профиль'
     name: 'Имя'
@@ -16,6 +22,7 @@ ru:
     status: 'Статус'
     сoach: 'Тренер'
     student: 'Студент'
+    employee: 'Сотрудник'
     spec: 'Специальность'
   session:
     create:
@@ -38,5 +45,10 @@ ru:
 
       has_acc: "Уже есть аккаунт? Войдите"
       has_no_acc: "Еще нет аккаунта? Зарегистрируйтесь!"
+  complaint:
+    new:
+      theme: "Тема:"
+      problem: "Опишите проблему:"
+      send: "Отправить"
       
 

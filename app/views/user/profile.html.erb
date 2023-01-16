@@ -6,9 +6,9 @@
         <h3 style='margin-left: 50px'><%=t('profile.email')%>: <%= current_user.email%><h3> <br>
         <h3 style='margin-left: 50px'><%=t('profile.status')%>: <%= @status %> <h3>
 
-        <% if @coach.present? %>
-            <h3 style='margin-left: 50px'><%=t('profile.spec')%>: <%= @coach.act.service.name%> => <%=@coach.act.activity%> <h3> 
-        <% else %>
+        <% if @coach.present?%>
+            <h3 style='margin-left: 50px'><%=t('profile.spec')%>: <%= @coach.act.service.name%> => <%=@coach.act.activity%> <h3>
+        <% elsif @employee.nil? %>
             <h3 style='margin-left: 50px'><%=t('profile.my_recs')%>:<h3>        
             <%= render 'user/student' %>
         <% end %>

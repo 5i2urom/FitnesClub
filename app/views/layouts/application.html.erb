@@ -30,7 +30,7 @@
                     <%= link_to t('header.service'), join_path, class: 'nav-link px-2', id: 'servs' %>
                       <ul class="dropdown-menu">
                           <% Service.all.each do |i| %>
-                            <%= link_to i.name, service_path(:service => i.name), class: 'nav-link px-2' %></li>  
+                            <%= link_to i.name, service_path(:service => i.name), class: 'nav-link px-2' %> 
                           <% end %>
                       </ul>
                   </div>
@@ -38,18 +38,46 @@
         </ul>
 
         <ul class = "nav col-12 col-lg-auto mb-2 mb-md-0">
+
           <% if user_signed_in? %>
-              <span class="navbar-brand mb-0 h1"><%= current_user.name %></span>
 
-              <% if Coach.find_by(user_id: current_user&.id) %>
-                  <li><%= link_to t('header.timetable'), coach_timetable_path, class: 'nav-link px-2' %></li>
-                <% end %> 
-                <li><%= link_to t('header.profile'), user_profile_path, class: 'nav-link px-2' %></li>      
+            <span class="navbar-brand mb-0 h1"><%= current_user.name %></span>
+            <% if Employee.find_by(user_id: current_user&.id).nil? %>
+              <ul class = "navbar-nav me-auto mb-2 mb-lg-0">       
+                  <li class="nav-item">
+                    <div class="dropdown">
+                      <div class='nav-link px-2'><%=t('header.feedback')%></div>
+                        <ul class="dropdown-menu">
+                          <%= link_to t('header.new_complaint'), complaint_new_path, class: 'nav-link px-2' %>
+                          <%= link_to t('header.history_complaint'), complaint_history_path, class: 'nav-link px-2' %>  
+                        </ul>
+                    </div>
+                  </li>
+              </ul>
 
-              <li><%= link_to t('header.exit'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'quit_button' %></li>
+            <% else %>
+              <ul class = "navbar-nav me-auto mb-2 mb-lg-0">       
+                  <li class="nav-item">
+                    <div class="dropdown">
+                      <div class='nav-link px-2'><%=t('header.complaints')%></div>
+                        <ul class="dropdown-menu">
+                          <%= link_to t('header.active_comlaints'), complaint_active_path, class: 'nav-link px-2' %>
+                          <%= link_to t('header.archive_comlaints'), complaint_archive_path, class: 'nav-link px-2' %>  
+                        </ul>
+                    </div>
+                  </li>
+              </ul>
+            <% end %>
+            <% if Coach.find_by(user_id: current_user&.id) %>
+                <li><%= link_to t('header.timetable'), coach_timetable_path, class: 'nav-link px-2' %></li>
+            <% end %> 
+
+            <li><%= link_to t('header.profile'), user_profile_path, class: 'nav-link px-2' %></li>
+            <li><%= link_to t('header.exit'), destroy_user_session_path, data: {turbo_method: :delete}, class: 'nav-link px-2', id: 'quit_button' %></li>
+            
           <% else %>
-              <li><%= link_to t('header.reg'), new_user_registration_path, class: 'nav-link px-2' %></li>
-              <li><%= link_to t('header.enter'), new_user_session_path, class: 'nav-link px-2' %></li>
+            <li><%= link_to t('header.reg'), new_user_registration_path, class: 'nav-link px-2' %></li>
+            <li><%= link_to t('header.enter'), new_user_session_path, class: 'nav-link px-2' %></li>
           <% end %>
         </ul>
       </div>

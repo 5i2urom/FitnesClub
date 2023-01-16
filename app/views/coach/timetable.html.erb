@@ -30,7 +30,6 @@
                 Записаны: <span id="calendar<%=r.id%>count1"><%=my_users.length%></span>/<%=r.limit%>         
             </div>
             <br>
-            <% my_users.first.name if my_users.any?%>
 
             <div class="modal fade" id="id<%=my_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -54,23 +53,22 @@
                                         <ol style='margin-left: 50px'>
                                             <% my_users.each do |user| %>
                                                 <div id="user<%=user.id%>calendar<%=r.id%>">
-                                                <% p "user#{user.id}calendar#{r.id}"%>
                                                 <li>
-                                                <%= user.name %>
-                                                    <%= form_with url: coach_rec_destroy_path do |f|%>
-                                                        <%= f.hidden_field :user_id, :value => user.id%>
-                                                        <%= f.hidden_field :calendar_id, :value => r.id%>
-                                                        <%= f.hidden_field :users_length, :value => my_users.length%>
-                                                        <% delete = 'Удалить'%>
-                                                        <%= f.submit(delete, class: "btn btn-danger")%>
-                                                    <% end %>
+                                                <%= "#{user.name} (#{user.email})" %>
+                                                <%= form_with url: coach_rec_destroy_path do |f|%>
+                                                    <%= f.hidden_field :user_id, :value => user.id%>
+                                                    <%= f.hidden_field :calendar_id, :value => r.id%>
+                                                    <%= f.hidden_field :users_length, :value => my_users.length%>
+                                                    <% delete = 'Удалить'%>
+                                                    <%= f.submit(delete, class: "btn btn-danger")%>
+                                                <% end %>
                                                 </li>
                                                 </div>
                                             <% end %>
                                         </ol>
                                     <% end %>
                                 <%= image_tag "star.jpg", size: "50x50", :alt => "Галка" %>
-                                    Осталось мест: <%=r.limit - my_users.length%>
+                                    Осталось мест: <span id="calendar<%=r.id%>count3"><%=r.limit - my_users.length%></span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">ОК</button>

@@ -6,9 +6,12 @@ class UserController < ApplicationController
 
   def profile
     @coach = Coach.find_by(user_id: current_user&.id)
+    @employee = Employee.find_by(user_id: current_user&.id)
     case 
     when @coach.present?
       @status = t('profile.сoach')
+    when @employee.present?
+      @status = t('profile.employee')
     else
       @status = t('profile.student')
     end

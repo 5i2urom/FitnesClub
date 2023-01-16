@@ -21,7 +21,7 @@
         <% file = "join/#{transl[$record[:service]]}_acts/#{transl[act]}" %> 
         <div class="container"  style="margin-right: 50px; position: relative; top: 30%;"> 
             <div> <% if ex%> <%= render file %> <%else%> Информация о занятии <%end%></div>
-            <% unless Coach.find_by(user_id: current_user&.id) && current_user.present? %>
+            <% unless (Coach.find_by(user_id: current_user&.id) || Employee.find_by(user_id: current_user&.id)) && current_user.present? %>
                 <div> <%= link_to 'Записаться', club_path,  class: "btn btn-primary", id: "zap"%> </div>
             <% end %>
         </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_214244) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_16_190215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_214244) do
     t.index ["act_id"], name: "index_coaches_on_act_id"
     t.index ["name"], name: "index_coaches_on_name", unique: true
     t.index ["user_id"], name: "index_coaches_on_user_id"
+  end
+
+  create_table "complaints", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "employee_id"
+    t.text "message", null: false
+    t.text "response"
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "theme", null: false
+    t.index ["employee_id"], name: "index_complaints_on_employee_id"
+    t.index ["user_id"], name: "index_complaints_on_user_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|

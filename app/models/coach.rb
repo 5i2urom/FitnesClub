@@ -2,6 +2,7 @@
 
 class Coach < ApplicationRecord
   belongs_to :act
+  belongs_to :user
   has_many :calendar_records, dependent: :destroy
 
   validates :name, presence: { message: 'не может быть пустым' }
