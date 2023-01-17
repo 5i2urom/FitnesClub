@@ -61,10 +61,12 @@ RSpec.describe 'join', type: :system do
     expect(page).to have_text("Календарь: #{act_name} в #{club_name}")
     expect(page).to have_text('января 2023')
     expect(page).to have_text(coach_name)
+    expect(page).to have_text('Свободно 3/3') #лимит
 
     click_button(my_time)
     click_button('Подтвердить')
     click_button('Выйти')
+    expect(page).to have_text('Вы записаны')
 
     visit user_profile_path
     expect(page).to have_text('Мой профиль')

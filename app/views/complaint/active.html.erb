@@ -9,7 +9,7 @@
                         <div> <%= comp.created_at.strftime("%d.%m.%Y") + ' ' + comp.created_at.strftime("%H:%M")%> </div>
                         <%= form_with url: complaint_decline_path do |f|%>
                             <%= f.hidden_field :comp_id, :value => comp.id%>
-                            <%= f.submit('Отклонить жалобу', class: "btn btn-danger")%>
+                            <%= f.submit('Отклонить жалобу', class: "btn btn-danger", id:"decl")%>
                         <% end %> 
                     </div>
                     <p style="margin-left: 50px;">Имя: <%=comp.user.name%></p> 
@@ -22,7 +22,7 @@
                         <div style="margin-left: 50px; width:550px;">
                             <%= f.hidden_field :comp_id, :value => comp.id%>
                             <strong>Ответ: </strong><%= f.text_area :reply, :rows => 3, class: "form-control", autofocus: true %><br>
-                            <%= f.submit('Отправить', class: "btn btn-primary")%>
+                            <%= f.submit('Отправить', class: "btn btn-primary", id:"send")%>
                         </div>
                     <%end%>  
                 </div>

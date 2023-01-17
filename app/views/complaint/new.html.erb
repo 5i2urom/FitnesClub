@@ -5,7 +5,7 @@
             <%= f.text_field :theme, class: "form-control", placeholder: t('complaint.new.theme'), autofocus: true %>
         </div>
         <div style="width:700px">
-            <%= f.text_area :problem, :rows => 12, class: "form-control", placeholder: t('complaint.new.problem'), autofocus: true %>
+            <%= f.text_area :problem, :rows => 12, class: "form-control", placeholder: t('complaint.new.problem'), autofocus: true, id: 'problem' %>
         </div>
         <div>
             <%= f.submit t('complaint.new.send'), class: 'btn btn-primary'%>
