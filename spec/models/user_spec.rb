@@ -20,8 +20,8 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password).with_message('не может быть пустым') }
 
     context 'when name - invalid' do
-      it { should_not allow_value(rand(1000)).for(:name) }
-      it { should_not allow_value(Faker::Lorem.word + rand(100).to_s).for(:name) }
+      it { should_not allow_value('*').for(:name) }
+      it { should_not allow_value(Faker::Lorem.word + '*'.to_s).for(:name) }
     end
 
     context 'when name - valid' do

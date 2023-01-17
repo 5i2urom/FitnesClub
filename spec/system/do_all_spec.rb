@@ -20,7 +20,7 @@ RSpec.describe 'join', type: :system do
     ClubAct.create!(act: Act.first, club: Club.first)
     # p coach_name
     Coach.create!(act: Act.first, name: coach_name)
-    CalendarRecord.create!(coach: Coach.first, club: Club.first, start_time:, end_time:)
+    CalendarRecord.create!(coach: Coach.first, club: Club.first, start_time:, end_time:, limit: 3)
   end
 
   scenario 'if authorized do all' do
@@ -59,7 +59,7 @@ RSpec.describe 'join', type: :system do
     find('#club').click
     sleep(2)
     expect(page).to have_text("Календарь: #{act_name} в #{club_name}")
-    expect(page).to have_text('января 2022')
+    expect(page).to have_text('января 2023')
     expect(page).to have_text(coach_name)
 
     click_button(my_time)

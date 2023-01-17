@@ -17,7 +17,7 @@ RSpec.describe 'join', type: :system do
     ClubAct.create!(act: Act.first, club: Club.first)
     # p coach_name
     Coach.create!(act: Act.first, name: coach_name)
-    CalendarRecord.create!(coach: Coach.first, club: Club.first, start_time:, end_time:)
+    CalendarRecord.create!(coach: Coach.first, club: Club.first, start_time:, end_time:, limit: 3)
   end
 
   scenario 'reversed step by step' do
