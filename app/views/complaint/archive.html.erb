@@ -1,2 +1,32 @@
-<h1>Complaint#archive</h1>
-<p>Find me in app/views/complaint/archive.html.erb</p>
+<div style="margin-left: 50px">
+    <h2><%= t('header.archive_complaints') %></h2> <br>
+    <% if Complaint.find_by(status: 1).present? || Complaint.find_by(status: 2).present?%>
+        <ol>     
+        <% Complaint.where('status>?', 0).each do |comp|%>             
+            <div class="card" style="font-size:20px; width:700px" id="comp<%= comp.id %>">
+                <div class="card-body">
+                    <div style='display:flex; justify-content: space-between;'>
+                        <div> <%= comp.created_at.strftime("%d.%m.%Y") + ' ' + comp.created_at.strftime("%H:%M")%> </div>
+                    </div>
+                    <p style="margin-left: 50px"><strong>Статус жалобы: </strong><%=t("complaint.new.#{comp.status}")%></p>
+                    <p style="margin-left: 50px;"><strong>Имя: </strong><%=comp.user.name%></p> 
+                    <p style="margin-left: 50px;"><strong>E-mail: </strong><%=comp.user.email%></p>
+                    <p style="margin-left: 50px;"><strong>Статус: </strong><%= @status.call(comp.user) %></p>  
+                    <p style="margin-left: 50px;"><strong>Тема: </strong><%=comp.theme%></p>
+                    <p style="margin-left: 50px;"><strong>Жалоба: </strong><%=comp.message%></p>
+                    <% if comp.response.present? %>
+                        <br>
+                        
+                        <p><%=comp.updated_at.strftime("%d.%m.%Y") + ' ' + comp.updated_at.strftime("%H:%M")%></p>
+                        <%p comp%>
+                        <p style="margin-left: 50px;"><strong>Сотрудник: </strong><%=comp.employee.user.name%></p>
+                        <p style="margin-left: 50px;"> <strong>Ответ: </strong><%=comp.response%></p>   
+                    <% end %>                     
+                </div>
+            </div>
+        <% end %>
+        </ol>
+    <%else %>
+        <h3> Нет архивных жалоб </h3>
+    <%end%>
+</div>

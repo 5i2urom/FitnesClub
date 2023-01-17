@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'complaint/history'
   get 'complaint/active'
   get 'complaint/archive'
+  post 'complaint/decline'
+  post 'complaint/reply'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'

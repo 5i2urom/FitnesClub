@@ -17,15 +17,60 @@ class ComplaintController < ApplicationController
   end
 
   def active
+    @status = lambda do |user|
+        coach = Coach.find_by(user_id: user)
+        employee = Employee.find_by(user_id: user)
+        case 
+        when coach.present?
+            status = t('profile.сoach')
+        when @employee.present?
+            status = t('profile.employee')
+        else
+            status = t('profile.student')
+        end
+        status    
+    end
   end
 
-  def archive
-  end
+    def reply
+        @comp_id = reply_params[:comp_id]
+        @reply = reply_params[:reply]
+        Complaint.find_by(id: @comp_id).update(status: 1, response: @reply, employee_id: Employee.find_by(user_id: current_user.id).id)
+    end
+
+    def decline
+        @comp_id = decline_params[:comp_id]
+        Complaint.find_by(id: @comp_id).update(status: 2)        
+    end
+
+    def archive
+        @status = lambda do |user|
+            coach = Coach.find_by(user_id: user)
+            employee = Employee.find_by(user_id: user)
+            case 
+            when coach.present?
+                status = t('profile.сoach')
+            when @employee.present?
+                status = t('profile.employee')
+            else
+                status = t('profile.student')
+            end
+            status    
+        end
+    end
 
   private
 
   def new_params
     params.permit(:theme, :problem)
+  end
+
+  def decline_params
+    params.permit(:comp_id)
+  end
+
+  def reply_params
+    params.permit(:comp_id, :reply)
   end
 
   def not_employee

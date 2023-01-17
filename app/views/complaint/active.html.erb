@@ -1,2 +1,35 @@
-<h1>Complaint#active</h1>
-<p>Find me in app/views/complaint/active.html.erb</p>
+<div style="margin-left: 50px">
+    <h2><%= t('header.active_complaints') %></h2> <br>
+    <% if Complaint.find_by(status: 0).present?%>
+        <ol>     
+        <% Complaint.where(status: 0).each do |comp|%>             
+            <div class="card" style="font-size:20px; width:700px" id="comp<%= comp.id %>">
+                <div class="card-body">
+                    <div style='display:flex; justify-content: space-between;'>
+                        <div> <%= comp.created_at.strftime("%d.%m.%Y") + ' ' + comp.created_at.strftime("%H:%M")%> </div>
+                        <%= form_with url: complaint_decline_path do |f|%>
+                            <%= f.hidden_field :comp_id, :value => comp.id%>
+                            <%= f.submit('Отклонить жалобу', class: "btn btn-danger")%>
+                        <% end %> 
+                    </div>
+                    <p style="margin-left: 50px;">Имя: <%=comp.user.name%></p> 
+                    <p style="margin-left: 50px;">E-mail: <%=comp.user.email%></p>
+                    <p style="margin-left: 50px;">Статус: <%= @status.call(comp.user) %></p>  
+                    <p style="margin-left: 50px;">Тема: <%=comp.theme%></p>
+                    <p style="margin-left: 50px;"><strong>Жалоба: </strong><%=comp.message%></p>
+
+                    <%= form_with url: complaint_reply_path do |f|%>
+                        <div style="margin-left: 50px; width:550px;">
+                            <%= f.hidden_field :comp_id, :value => comp.id%>
+                            <strong>Ответ: </strong><%= f.text_area :reply, :rows => 3, class: "form-control", autofocus: true %><br>
+                            <%= f.submit('Отправить', class: "btn btn-primary")%>
+                        </div>
+                    <%end%>  
+                </div>
+            </div>
+        <% end %>
+        </ol>
+    <%else %>
+        <h3> Нет активных жалоб </h3>
+    <%end%>
+</div>

@@ -50,4 +50,7 @@ en:
       theme: "Theme:"
       problem: "Describe the problem:"
       send: "Send"
+      process: "Complaint in process"
+      success: "Successfully done"
+      fail: "Complaint declined"
 

@@ -11,8 +11,8 @@ ru:
     new_complaint: "Новая жалоба"
     history_complaint: "История жалоб"
     complaints: "Обращения"
-    active_comlaints: "Активные жалобы"
-    archive_comlaints: "Архив"
+    active_complaints: "Активные жалобы"
+    archive_complaints: "Архив"
   profile:
     my: 'Мой профиль'
     name: 'Имя'
@@ -50,5 +50,8 @@ ru:
       theme: "Тема:"
       problem: "Опишите проблему:"
       send: "Отправить"
+      process: "Жалоба принята к рассмотрению"
+      success: "Успешно завершено"
+      fail: "Жалоба отклонена"
       
 
